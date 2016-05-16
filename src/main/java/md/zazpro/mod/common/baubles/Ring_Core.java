@@ -16,10 +16,12 @@ import baubles.common.lib.PlayerHandler;
 import md.zazpro.mod.common.items.ItemsAndUpgrades;
 import md.zazpro.mod.helper.Wrapper;
 import net.minecraft.block.Block;
+import net.minecraft.block.IGrowable;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -63,6 +65,7 @@ public class Ring_Core extends BaubleBase {
             list.add(TextFormatting.WHITE + I18n.translateToLocal("tooltip.ring.Haste"));
             list.add(TextFormatting.WHITE + I18n.translateToLocal("tooltip.ring.Power"));
             list.add(TextFormatting.WHITE + I18n.translateToLocal("tooltip.ring.FastGrowth"));
+            list.add(TextFormatting.WHITE + I18n.translateToLocal("tooltip.ring.Harvest"));
             list.add(TextFormatting.WHITE + I18n.translateToLocal("tooltip.ring.Repair"));
         } else if (itemStack.getTagCompound() != null) {
             Boolean invisibility = itemStack.getTagCompound().getBoolean("Invisibility");
@@ -78,6 +81,8 @@ public class Ring_Core extends BaubleBase {
                 list.add(TextFormatting.AQUA + I18n.translateToLocal("tooltip.ring.PowerLVL") + ": +" + power);
             Boolean Growth = itemStack.getTagCompound().getBoolean("Growth");
             if (Growth) list.add(TextFormatting.AQUA + I18n.translateToLocal("tooltip.ring.FastGrowth"));
+            Boolean Harvest = itemStack.getTagCompound().getBoolean("Harvest");
+            if (Harvest) list.add(TextFormatting.AQUA + I18n.translateToLocal("tooltip.ring.Harvest"));
             Boolean Repair = itemStack.getTagCompound().getBoolean("Repair");
             if (Repair) list.add(TextFormatting.AQUA + I18n.translateToLocal("tooltip.ring.Repair"));
         }
@@ -130,6 +135,9 @@ public class Ring_Core extends BaubleBase {
                 if (isLegalb(itemStack1, itemStack2, "Growth"))
                     UpdatePlant(player, world);
 
+                if (isLegalb(itemStack1, itemStack2, "Harvest"))
+                    HarvestPlant(player, world);
+
                 if (isLegalb(itemStack1, itemStack2, "Repair"))
                     RepairItem(player, world);
 
@@ -154,6 +162,33 @@ public class Ring_Core extends BaubleBase {
                         if (block instanceof IPlantable)
                             if (world.rand.nextInt(15) == 0)
                                 block.updateTick(world, new BlockPos(ix, iy, iz), state, world.rand);
+                    }
+        }
+    }
+
+    public void HarvestPlant(EntityPlayer Player, World world) {
+        if (!world.isRemote) {
+            int range = 5;
+            int verticalRange = 2;
+            int posX = (int) Math.round(Player.posX - 0.5f);
+            int posY = (int) Player.posY;
+            int posZ = (int) Math.round(Player.posZ - 0.5f);
+
+            for (int ix = posX - range; ix <= posX + range; ix++)
+                for (int iz = posZ - range; iz <= posZ + range; iz++)
+                    for (int iy = posY - verticalRange; iy <= posY + verticalRange; iy++) {
+                        BlockPos pos = new BlockPos(ix, iy, iz);
+                        Block block = world.getBlockState(pos).getBlock();
+                        if (block == Blocks.melon_stem || block == Blocks.pumpkin_stem)
+                            continue;
+                        if (block == Blocks.melon_block || block == Blocks.pumpkin) {
+                            block.dropBlockAsItem(world, pos, world.getBlockState(pos), 0);
+                            world.setBlockToAir(pos);
+                        }
+                        if (block instanceof IGrowable && !((IGrowable) block).canGrow(world, pos, world.getBlockState(pos), true)) {
+                            block.dropBlockAsItem(world, pos, world.getBlockState(pos), 0);
+                            world.setBlockState(pos, block.getDefaultState(), 2);
+                        }
                     }
         }
     }

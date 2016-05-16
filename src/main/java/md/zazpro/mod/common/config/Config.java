@@ -23,7 +23,7 @@ public class Config {
     public static boolean CUpdate;
     public static boolean CFly, CUpgrade_FireImmune, CUpgrade_HighStep, CUpgrade_FallImmune, CUpgrade_WaterBreathing, CUpgrade_SpeedI, CUpgrade_SpeedII, CUpgrade_SpeedIII;
     public static boolean CUpgrade_JumpI, CUpgrade_JumpII, CUpgrade_JumpIII, CUpgrade_WitherImmune, CMagnetRing, CUpgrade_HealthRegen, CUpgrade_Invisibility, CNotLMagnetRing;
-    public static boolean CUpgrade_HasteI, CUpgrade_HasteII, CUpgrade_HasteIII, CUpgrade_PowerI, CUpgrade_PowerII, CUpgrade_PowerIII, CUpgrade_NightVision, CUpgrade_Growth, CUpgrade_Repair;
+    public static boolean CUpgrade_HasteI, CUpgrade_HasteII, CUpgrade_HasteIII, CUpgrade_PowerI, CUpgrade_PowerII, CUpgrade_PowerIII, CUpgrade_NightVision, CUpgrade_Growth, CUpgrade_Harvest, CUpgrade_Repair;
 
     public static void createConfig() {
         File configFile = new File(Loader.instance().getConfigDir(), "BaublessStuff.cfg");
@@ -55,6 +55,7 @@ public class Config {
         CUpgrade_Invisibility = Config.config.get("upgrades", "Invisibility Upgrade", true).getBoolean();
         CUpgrade_NightVision = Config.config.get("upgrades", "Night Vision", true).getBoolean();
         CUpgrade_Growth = Config.config.get("upgrades", "Plant Acceleration", true).getBoolean();
+        CUpgrade_Harvest = Config.config.get("upgrades", "Plant Harvest Upgrade", true).getBoolean();
         CUpgrade_Repair = Config.config.get("upgrades", "Stuff Repairing", true).getBoolean();
 
         config.save();

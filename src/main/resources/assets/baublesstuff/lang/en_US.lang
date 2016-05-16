@@ -33,6 +33,7 @@ tooltip.ring.HasteLVL=Mining Bonus Speed
 tooltip.ring.Power=Power Upgrade
 tooltip.ring.PowerLVL=Attack Bonus Damage
 tooltip.ring.FastGrowth=Plant Acceleration Upgrade
+tooltip.ring.Harvest=Plant Harvest Upgrade
 tooltip.ring.Repair=Stuff Repairing Upgrade
 #Items
 tooltip.items.Pigman=Pigman drop

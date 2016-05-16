@@ -45,6 +45,7 @@ public class ItemsAndUpgrades {
     public static Item Upgrade_HealthRegen;
     public static Item Upgrade_NightVision;
     public static Item Upgrade_Growth;
+    public static Item Upgrade_Harvest;
     public static Item Upgrade_HasteI;
     public static Item Upgrade_HasteII;
     public static Item Upgrade_HasteIII;
@@ -64,6 +65,7 @@ public class ItemsAndUpgrades {
     public static Item Sheet_WaterBreathing;
     public static Item Sheet_WitherImmune;
     public static Item Sheet_Growth;
+    public static Item Sheet_Harvest;
     public static Item Sheet_Repair;
 
     public static void init() {
@@ -92,6 +94,7 @@ public class ItemsAndUpgrades {
         Upgrade_HealthRegen = new ItemUpgrade("Upgrade_HealthRegen");
         Upgrade_NightVision = new ItemUpgrade("Upgrade_NightVision");
         Upgrade_Growth = new ItemUpgrade("Upgrade_Growth");
+        Upgrade_Harvest = new ItemUpgrade("Upgrade_Harvest");
         Upgrade_HasteI = new ItemUpgrade("Upgrade_HasteI");
         Upgrade_HasteII = new ItemUpgrade("Upgrade_HasteII");
         Upgrade_HasteIII = new ItemUpgrade("Upgrade_HasteIII");
@@ -111,6 +114,7 @@ public class ItemsAndUpgrades {
         Sheet_WaterBreathing = new ItemSheet("Sheet_WaterBreathing");
         Sheet_WitherImmune = new ItemSheet("Sheet_WitherImmune");
         Sheet_Growth = new ItemSheet("Sheet_Growth");
+        Sheet_Harvest = new ItemSheet("Sheet_Harvest");
         Sheet_Repair = new ItemSheet("Sheet_Repair");
     }
 
@@ -130,6 +134,7 @@ public class ItemsAndUpgrades {
         GameRegistry.register(Sheet_WaterBreathing);
         GameRegistry.register(Sheet_WitherImmune);
         GameRegistry.register(Sheet_Growth);
+        GameRegistry.register(Sheet_Harvest);
         GameRegistry.register(Sheet_Repair);
         GameRegistry.register(Belt_Core);
         GameRegistry.register(Pendant_Core);
@@ -159,6 +164,7 @@ public class ItemsAndUpgrades {
         GameRegistry.register(Upgrade_PowerII);
         GameRegistry.register(Upgrade_PowerIII);
         GameRegistry.register(Upgrade_Growth);
+        GameRegistry.register(Upgrade_Harvest);
         GameRegistry.register(Upgrade_Repair);
     }
 
@@ -178,6 +184,7 @@ public class ItemsAndUpgrades {
         reg(Sheet_WaterBreathing);
         reg(Sheet_WitherImmune);
         reg(Sheet_Growth);
+        reg(Sheet_Harvest);
         reg(Sheet_Repair);
         reg(Belt_Core);
         reg(Pendant_Core);
@@ -207,6 +214,7 @@ public class ItemsAndUpgrades {
         reg(Upgrade_PowerII);
         reg(Upgrade_PowerIII);
         reg(Upgrade_Growth);
+        reg(Upgrade_Harvest);
         reg(Upgrade_Repair);
     }
 

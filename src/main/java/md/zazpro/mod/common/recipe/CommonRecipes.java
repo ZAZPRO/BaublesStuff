@@ -132,6 +132,12 @@ public class CommonRecipes {
                 "   ",
                 'B', ItemsAndUpgrades.Spell_Book, 'T', new ItemStack(ItemsAndUpgrades.Translator, 1, OreDictionary.WILDCARD_VALUE), 'F', Items.writable_book, 'W', Items.nether_wart, 'P', Items.blaze_powder, 'X', Blocks.melon_block);
 
+        GameRegistry.addRecipe(new ItemStack(ItemsAndUpgrades.Sheet_Harvest),
+                "BTF",
+                "WPX",
+                "   ",
+                'B', ItemsAndUpgrades.Spell_Book, 'T', new ItemStack(ItemsAndUpgrades.Translator, 1, OreDictionary.WILDCARD_VALUE), 'F', Items.writable_book, 'W', Items.nether_wart, 'P', Items.blaze_powder, 'X', Items.golden_hoe);
+
         GameRegistry.addRecipe(new ItemStack(ItemsAndUpgrades.Sheet_Repair),
                 "BTF",
                 "WPX",
@@ -299,6 +305,13 @@ public class CommonRecipes {
                     "ABA",
                     "   ",
                     'A', ItemsAndUpgrades.Sheet_Growth, 'B', ItemsAndUpgrades.Upgrade_Stone);
+
+        if (Config.CUpgrade_Harvest == true)
+            GameRegistry.addRecipe(new ItemStack(ItemsAndUpgrades.Upgrade_Harvest),
+                    " X ",
+                    "ABA",
+                    " X ",
+                    'A', ItemsAndUpgrades.Sheet_Harvest, 'B', ItemsAndUpgrades.Upgrade_Stone, 'X', Items.diamond);
 
         if (Config.CUpgrade_Repair)
             GameRegistry.addRecipe(new ItemStack(ItemsAndUpgrades.Upgrade_Repair),

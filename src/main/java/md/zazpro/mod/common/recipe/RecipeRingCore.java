@@ -69,6 +69,7 @@ public class RecipeRingCore implements IRecipe {
                     tag.setBoolean("Invisibility", false);
                     tag.setBoolean("NightVision", false);
                     tag.setBoolean("Growth", false);
+                    tag.setBoolean("Harvest", false);
                     tag.setBoolean("Repair", false);
                     tag.setFloat("Haste", 0);
                     tag.setInteger("Power", 0);
@@ -88,6 +89,10 @@ public class RecipeRingCore implements IRecipe {
 
                         if (currentStack.getItem() == ItemsAndUpgrades.Ring_Core && currentStack2.getItem() == ItemsAndUpgrades.Upgrade_Growth && currentStack != null && currentStack.hasTagCompound()) {
                             currentStack.getTagCompound().setBoolean("Growth", true);
+                        }
+
+                        if (currentStack.getItem() == ItemsAndUpgrades.Ring_Core && currentStack2.getItem() == ItemsAndUpgrades.Upgrade_Harvest && currentStack != null && currentStack.hasTagCompound()) {
+                            currentStack.getTagCompound().setBoolean("Harvest", true);
                         }
 
                         if (currentStack.getItem() == ItemsAndUpgrades.Ring_Core && currentStack2.getItem() == ItemsAndUpgrades.Upgrade_Repair && currentStack != null && currentStack.hasTagCompound()) {

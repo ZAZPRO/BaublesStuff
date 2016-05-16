@@ -13,7 +13,7 @@ out
 *.iml
 .idea
 
-# gradle
+gradle
 build
 .gradle
 
