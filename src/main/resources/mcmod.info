@@ -1,0 +1,18 @@
+[{
+
+"modid": "baublesstuff",
+"name": "Baubles Stuff",
+"description": "Let's add some Module Baubles!",
+"mcversion": "1.9.0",
+"version": "2.0.8",
+"url": "", 
+"updateUrl": "",
+"authors": [ "ZAZPRO" ],
+"credits": "By ZAZPRO(Code), MrGreigZen,SteamWolf17 (Textures)",
+"logoFile": "assets/baublesstuff/textures/logo.png",
+"screenshots": [], 
+"parent":"", 
+"requiredMods": [ "Baubles" ],
+"dependencies": [ "Baubles" ]
+
+}]

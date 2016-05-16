@@ -1,0 +1,166 @@
+#Creative Tab
+itemGroup.TabBaublesStuff=Baubles Stuff
+
+#Baubles
+item.Belt_Core.name=Пояс
+item.Pendant_Core.name=Амулет
+item.Ring_Core.name=Кольцо
+item.Ring_Magnet.name=Магнитное Кольцо
+item.Ring_NotLMagnet.name=Мгновенное Магнитное Кольцо
+
+#Tooltips
+#Baubles
+tooltip.shift=Нажмите Shift чтобы посмотреть список возможных улучшений
+#Belt
+tooltip.belt.HighStep=Улучшение Высоты шага
+tooltip.belt.Speed=Улучшение Скорости
+tooltip.belt.SpeedLVL=Уровень Улучшения Скорости
+tooltip.belt.Jump=Улучшение Прыжка
+tooltip.belt.JumpLVL=Уровень Улучшения Прыжка
+tooltip.belt.Fly=Улучшение Полета
+#Pendant
+tooltip.pendant.FireIm=Улучшение Иммунитета к Огню
+tooltip.pendant.FallIm=Улучшение Иммунитета к Падению
+tooltip.pendant.WitherIm=Улучшение Иммунитета к Иссушению
+tooltip.pendant.WaterBreath=Улучшение Дыхания под водой
+tooltip.pendant.HealthRegen=Улучшение Регенерации Здоровья
+#Ring
+tooltip.ring.warning=Улучшения будут работать только если на вас одно "Кольцо"
+tooltip.ring.Invisibility=Улучшение Невидимости
+tooltip.ring.NightVision=Улучшение Ночного Зрения
+tooltip.ring.Haste=Улучшение Скорости Копания
+tooltip.ring.HasteLVL=Бонус Скорости Копания
+tooltip.ring.Power=Улучшение Силы
+tooltip.ring.PowerLVL=Бонус Урона
+tooltip.ring.FastGrowth=Улучшение Скорости роста
+tooltip.ring.Repair=Улучшение Починки предметов
+#Items
+tooltip.items.Pigman=Падает с Свинозомби
+#Translator
+tooltip.translator.uses=Максимальное количество использований
+
+#Sheets
+item.Sheet_FireImmune.name=Лист Иммунитета к Огню
+item.Sheet_FallImmune.name=Лист Иммунитета к Падению
+item.Sheet_Haste.name=Лист Скорости Копания
+item.Sheet_HealthRegen.name=Лист Регенерации Здоровья
+item.Sheet_Invisibility.name=Лист Невидимости
+item.Sheet_Jump.name=Лист Прыжка
+item.Sheet_NightVision.name=Лист Ночного Зрения
+item.Sheet_Power.name=Лист Силы
+item.Sheet_Speed.name=Лист Скорости
+item.Sheet_WaterBreathing.name=ЛистWater Breathing Paper
+item.Sheet_WitherImmune.name=ЛистWither Immune Paper
+item.Sheet_Growth.name=Лист Дыхания под водой
+item.Sheet_Repair.name=Лист Починки предметов
+item.Sheet_Harvest.name=Лист Скорости роста
+
+#Upgrades
+item.Upgrade_Stone.name=Камень Улудшения
+item.Upgrade_SpeedI.name=Улучшение Скорости I
+item.Upgrade_SpeedII.name=Улучшение Скорости II
+item.Upgrade_SpeedIII.name=Улучшение Скорости III
+item.Upgrade_JumpI.name=Улучшение Прыжка I
+item.Upgrade_JumpII.name=Улучшение Прыжка II
+item.Upgrade_JumpIII.name=Улучшение Прыжка III
+item.Upgrade_HighStep.name=Улучшение Высоты шага
+item.Upgrade_Fly.name=Улучшение Полета
+item.Upgrade_FireImmune.name=Улучшение Иммунитета к Огню
+item.Upgrade_FallImmune.name=Улучшение Иммунитета к Падению
+item.Upgrade_WaterBreathing.name=Улучшение Дыхания под водой
+item.Upgrade_WitherImmune.name=Улучшение Иммунитета к Иссушению
+item.Upgrade_HealthRegen.name=Улучшение Регенерации Здоровья
+item.Upgrade_Invisibility.name=Улучшение Невидимости
+item.Upgrade_NightVision.name=Улучшение Ночного Зрения
+item.Upgrade_HasteI.name=Улучшение Скорости Копания I
+item.Upgrade_HasteII.name=Улучшение Скорости Копания II
+item.Upgrade_HasteIII.name=Улучшение Скорости Копания III
+item.Upgrade_PowerI.name=Улучшение Силы I
+item.Upgrade_PowerII.name=Улучшение Силы II
+item.Upgrade_PowerIII.name=Улучшение Силы III
+item.Upgrade_Growth.name=Улучшение Скорости роста
+item.Upgrade_Repair.name=Улучшение Починки предметов
+item.Upgrade_Harvest.name=Улучшение Сбора урожая
+
+#Other Item/Blocks
+item.Spell_Book.name=Книга заклинаний
+item.Translator.name=Карманный переводчик
+tile.UpgradeExtractor.name=Извлекатель Улудшений
+item.Broken_Translator.name=Сломанный переводчик
+
+#Achievements
+achievement.bs_install=You have installed Baubles Stuff!
+achievement.bs_install.desc=You are the best!
+achievement.bs_craftBelt=Craft Belt
+achievement.bs_craftBelt.desc=Can only dream about
+achievement.bs_craftPendant=Craft Pendant
+achievement.bs_craftPendant.desc=This texture is awesome!
+achievement.bs_craftRing=Craft Ring
+achievement.bs_craftRing.desc=One Ring to rule them all
+achievement.bs_craftMagnetRing=Craft Magnet Ring
+achievement.bs_craftMagnetRing.desc=Choose your side!
+achievement.bs_craftNotLMagnetRing=Craft Instantaneous Magnet Ring
+achievement.bs_craftNotLMagnetRing.desc=Choose your side!
+achievement.bs_craftHighStep=Craft HighStep Upgrade
+achievement.bs_craftHighStep.desc=It feels more comfortable now
+achievement.bs_craftSpeedI=Craft Speed Upgrade I
+achievement.bs_craftSpeedI.desc=Can I be faster?
+achievement.bs_craftSpeedII=Craft Speed Upgrade II
+achievement.bs_craftSpeedII.desc=Need for Speed
+achievement.bs_craftSpeedIII=Craft Speed Upgrade III
+achievement.bs_craftSpeedIII.desc=Super Sonic one
+achievement.bs_craftJumpI=Craft Jump Upgrade I
+achievement.bs_craftJumpI.desc=Let's jump!
+achievement.bs_craftJumpII=Craft Jump Upgrade II
+achievement.bs_craftJumpII.desc=Higher!
+achievement.bs_craftJumpIII=Craft Jump Upgrade III
+achievement.bs_craftJumpIII.desc=Crazy!
+achievement.bs_craftFly=Craft Flying Upgrade
+achievement.bs_craftFly.desc=I can touch the sky
+achievement.bs_craftFireImmune=Craft Fire Immune Upgrade
+achievement.bs_craftFireImmune.desc=Not afraid of Ragnaros now
+achievement.bs_craftFallImmune=Craft Fall Damage Immune Upgrade
+achievement.bs_craftFallImmune.desc=Like in Portal!
+achievement.bs_craftWitherImmune=Craft Wither Immune Upgrade
+achievement.bs_craftWitherImmune.desc=Always wet
+achievement.bs_craftWaterBreathing=Craft Water Breathing Upgrade
+achievement.bs_craftWaterBreathing.desc=Secret air supply
+achievement.bs_craftHealthRegen=Craft Health Regeneration Upgrade
+achievement.bs_craftHealthRegen.desc=Feel healthier
+achievement.bs_craftInvisibility=Craft Invisibility Upgrade
+achievement.bs_craftInvisibility.desc=It's some kind of magic
+achievement.bs_craftHasteI=Craft Haste Upgrade I
+achievement.bs_craftHasteI.desc=It is legal!
+achievement.bs_craftHasteII=Craft Haste Upgrade II
+achievement.bs_craftHasteII.desc=Comfortable mining
+achievement.bs_craftHasteIII=Craft Haste Upgrade III
+achievement.bs_craftHasteIII.desc=Obsidian's fear!
+achievement.bs_craftGrowth=Craft Plant Acceleration Upgrade
+achievement.bs_craftGrowth.desc=Making farming more interesting
+achievement.bs_craftPowerI=Craft Power Upgrade I
+achievement.bs_craftPowerI.desc=I can be stronger!
+achievement.bs_craftPowerII=Craft Power Upgrade II
+achievement.bs_craftPowerII.desc=No steroids
+achievement.bs_craftPowerIII=Craft Power Upgrade III
+achievement.bs_craftPowerIII.desc=Gym only!
+achievement.bs_craftNightVision=Craft Night Vision Upgrade
+achievement.bs_craftNightVision.desc=A lot of carrot
+achievement.bs_craftRepair=Craft Stuff Repairing Upgrade
+achievement.bs_craftRepair.desc=Portable blacksmith
+achievement.bs_craftHarvest=Craft Plant Harvest Upgrade
+achievement.bs_craftHarvest.desc=Always wanted^^
+achievement.bs_craftExtractor=Craft Extractor
+achievement.bs_craftExtractor.desc=Just right click it!
+
+#Thaumcraft
+item.Sheet_WarpProtection.name=Warp Protection Paper
+item.Upgrade_WarpProtection.name=Warp Protection Upgrade
+item.Belt_Runic.name=Runic Belt Upgrade
+item.Pendant_Runic.name=Runic Pendant Upgrade
+item.Ring_Runic.name=Runic Ring Upgrade
+tc.research_name.SHIELDBAUBLES=Baubles Stuff Shielding
+tc.research_text.SHIELDBAUBLES=Make it better!
+baublesstuff.research_page.SHIELDBAUBLES.1=You found a way to create special upgrades that allows you to infuse baubles from Baubles Stuff. Now you can get Runic Shielding and all great stuff from baubles upgrades in one item! To apply it justadd it in craft grid.
+tc.research_name.WARPUPGRADE=Warp Protection Upgrade
+tc.research_text.WARPUPGRADE=Portable Spa
+baublesstuff.research_page.WARPUPGRADE.1=Now you don't have to take Arcane Spa with you. Just have some salt in your inventory and you'll be always protected!

@@ -1,0 +1,84 @@
+//Buildscript copied from Thaumic Tinkerer build.gradle, a large part of which was made by nekosune
+buildscript {
+    repositories {
+        mavenCentral()
+        maven {
+            name = "forge"
+            url = "http://files.minecraftforge.net/maven"
+        }
+        maven {
+            name = "sonatype"
+            url = "https://oss.sonatype.org/content/repositories/snapshots/"
+        }
+        maven {
+            url 'https://oss.sonatype.org/content/groups/public'
+        }
+        mavenLocal()
+    }
+    dependencies {
+        classpath 'net.minecraftforge.gradle:ForgeGradle:2.1-SNAPSHOT'
+    }
+}
+
+
+apply plugin: 'net.minecraftforge.gradle.forge'
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+version = "2.0.8"
+group= "md.zazpro.mod" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
+archivesBaseName = "baublesstuff"
+
+minecraft {
+    version = "1.9-12.16.1.1887"
+    runDir = "run"
+	mappings = "snapshot_20160312"
+    replace '@version@', project.version
+    replace '@keySecret@', System.env.SECRET != null ? "$System.env.SECRET" : ''
+
+}
+
+if (System.getenv("BUILD_NUMBER")!=null)
+    version = "${System.getenv().BUILD_NUMBER}"
+if (project.hasProperty("releaseType"))
+    if (project.releaseType == "ALPHA")
+        version = "alpha-" + version
+
+
+jar {
+    manifest {
+        attributes 'FMLAT': 'baubles_at.cfg'
+    }
+}
+
+dependencies {
+    compile files ("lib/Baubles-1.9-1.2.0.0-deobf.jar")
+}
+
+processResources
+        {
+            from(sourceSets.main.resources.srcDirs) {
+                include 'mcmod.info'
+                expand 'version': project.version, 'MCversion': project.minecraft.version
+            }
+            from(sourceSets.main.resources.srcDirs) {
+                exclude 'mcmod.info'
+            }
+        }
+		
+task deobfJar(type: Jar) {
+    from sourceSets.main.output
+    classifier = 'dev'
+}
+
+sourceSets {
+    main {
+        java {
+            srcDir 'src/main/java'
+        }
+        resources {
+            srcDir 'src/main/resources'
+        }
+    }
+}
