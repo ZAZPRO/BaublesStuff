@@ -1,3 +1,14 @@
+/*
+ * This class (RingBaseMagnet.java) was created by <zazpro>. It's distributed as
+ * part of the Baubles Stuff Mod. Get the Source Code in github:
+ * https://github.com/ZAZPRO/BaublesStuff
+ *
+ * Baubles Stuff is Open Source and distributed under the
+ * Baubles Stuff License: https://github.com/ZAZPRO/BaublesStuff/blob/master/LICENSE.MD
+ *
+ * © 2016 zazpro
+ */
+
 package md.zazpro.mod.common.baubles;
 
 import baubles.api.BaubleType;
@@ -19,19 +30,9 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import java.util.Arrays;
 import java.util.List;
 
-/**
- * This class was created by <zazpro>. It's distributed as
- * part of the Baubles Stuff Mod. Get the Source Code in github:
- * https://github.com/ZAZPRO/BaublesStuff
- *
- * Baubles Stuff is Open Source and distributed under the
- * Baubles Stuff License: https://github.com/ZAZPRO/BaublesStuff/blob/master/LICENSE.md
- * Created by zazpro on 5/16/2016.
- */
 public abstract class RingBaseMagnet extends BaubleBase {
 
-    public static final List<String> BLACKLIST = Arrays.asList(new String[]{
-            "appliedenergistics2:item.ItemCrystalSeed",});
+    public static final List<String> BLACKLIST = Arrays.asList("appliedenergistics2:item.ItemCrystalSeed");
 
     private int range;
 

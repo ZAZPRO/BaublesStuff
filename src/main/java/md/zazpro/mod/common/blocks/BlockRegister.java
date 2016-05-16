@@ -1,3 +1,14 @@
+/*
+ * This class (BlockRegister.java) was created by <zazpro>. It's distributed as
+ * part of the Baubles Stuff Mod. Get the Source Code in github:
+ * https://github.com/ZAZPRO/BaublesStuff
+ *
+ * Baubles Stuff is Open Source and distributed under the
+ * Baubles Stuff License: https://github.com/ZAZPRO/BaublesStuff/blob/master/LICENSE.MD
+ *
+ * © 2016 zazpro
+ */
+
 package md.zazpro.mod.common.blocks;
 
 import md.zazpro.mod.client.ModInfo;
@@ -8,15 +19,6 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
-/**
- * This class was created by <zazpro>. It's distributed as
- * part of the Baubles Stuff Mod. Get the Source Code in github:
- * https://github.com/ZAZPRO/BaublesStuff
- *
- * Baubles Stuff is Open Source and distributed under the
- * Baubles Stuff License: https://github.com/ZAZPRO/BaublesStuff/blob/master/LICENSE.md
- * Created by zazpro on 5/16/2016.
- */
 public class BlockRegister {
 
     public static Block UpgradeExtractor;

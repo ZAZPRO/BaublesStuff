@@ -1,3 +1,15 @@
+
+/*
+ * This class (build.gradle) was created by <zazpro>. It's distributed as
+ * part of the Baubles Stuff Mod. Get the Source Code in github:
+ * https://github.com/ZAZPRO/BaublesStuff
+ *
+ * Baubles Stuff is Open Source and distributed under the
+ * Baubles Stuff License: https://github.com/ZAZPRO/BaublesStuff/blob/master/LICENSE.MD
+ *
+ * © 2016 zazpro
+ */
+
 //Buildscript copied from Thaumic Tinkerer build.gradle, a large part of which was made by nekosune
 buildscript {
     repositories {
@@ -27,19 +39,19 @@ sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
 version = "2.0.8"
-group= "md.zazpro.mod" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
+group = "md.zazpro.mod" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = "baublesstuff"
 
 minecraft {
     version = "1.9-12.16.1.1887"
     runDir = "run"
-	mappings = "snapshot_20160312"
+    mappings = "snapshot_20160312"
     replace '@version@', project.version
     replace '@keySecret@', System.env.SECRET != null ? "$System.env.SECRET" : ''
 
 }
 
-if (System.getenv("BUILD_NUMBER")!=null)
+if (System.getenv("BUILD_NUMBER") != null)
     version = "${System.getenv().BUILD_NUMBER}"
 if (project.hasProperty("releaseType"))
     if (project.releaseType == "ALPHA")
@@ -53,7 +65,7 @@ jar {
 }
 
 dependencies {
-    compile files ("lib/Baubles-1.9-1.2.0.0-deobf.jar")
+    compile files("lib/Baubles-1.9-1.2.0.0-deobf.jar")
 }
 
 processResources
@@ -66,7 +78,7 @@ processResources
                 exclude 'mcmod.info'
             }
         }
-		
+
 task deobfJar(type: Jar) {
     from sourceSets.main.output
     classifier = 'dev'
