@@ -1,0 +1,10 @@
+{
+  "homepage": "http://minecraft.curseforge.com/projects/baubles-stuff/files",
+  "promos": {
+    "1.9-latest": "2.0.9",
+    "1.9-recommended": "2.0.9"
+  },
+  "1.9": {
+    "2.0.9": "fry: Fix color multiplier applied incorrectly for items.\nfry: OBJ loader: fixed another whitespace-related issue; removed unused "modifyUVs" property for now; added the "flip-v" property to switch between OpenGL-style and DirextX-style model UVs; fixed normals - they are now correct in-world, still a bit strange for the items; fixed normals a little bit for B3D models too."
+  }
+}
