@@ -12,7 +12,7 @@
 package md.zazpro.mod.common.recipe;
 
 import md.zazpro.mod.common.blocks.BlockRegister;
-import md.zazpro.mod.common.config.Config;
+import md.zazpro.mod.common.config.ConfigurationHandler;
 import md.zazpro.mod.common.items.ItemsAndUpgrades;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -52,7 +52,7 @@ public class CommonRecipes {
                 " G ",
                 'G', Items.gold_ingot);
 
-        if (Config.CMagnetRing)
+        if (ConfigurationHandler.CMagnetRing)
             GameRegistry.addRecipe(new ItemStack(ItemsAndUpgrades.Ring_Magnet),
                     "RA ",
                     "ABA",
@@ -144,7 +144,7 @@ public class CommonRecipes {
                 "   ",
                 'B', ItemsAndUpgrades.Spell_Book, 'T', new ItemStack(ItemsAndUpgrades.Translator, 1, OreDictionary.WILDCARD_VALUE), 'F', Items.writable_book, 'W', Items.nether_wart, 'P', Items.blaze_powder, 'X', Blocks.iron_block);
 
-        if (Config.CUpgrade_HighStep)
+        if (ConfigurationHandler.CUpgrade_HighStep)
             GameRegistry.addRecipe(new ItemStack(ItemsAndUpgrades.Upgrade_HighStep),
                     " T ",
                     "ABC",
@@ -152,173 +152,180 @@ public class CommonRecipes {
                     'A', ItemsAndUpgrades.Sheet_Speed, 'B', ItemsAndUpgrades.Upgrade_Stone, 'C', ItemsAndUpgrades.Sheet_Jump, 'T', Items.ghast_tear, 'F', Items.blaze_powder);
 
         //Upgrades
-        if (Config.CUpgrade_FireImmune)
+        if (ConfigurationHandler.CUpgrade_FireImmune)
             GameRegistry.addRecipe(new ItemStack(ItemsAndUpgrades.Upgrade_FireImmune),
                     "   ",
                     "ABA",
                     "   ",
                     'A', ItemsAndUpgrades.Sheet_FireImmune, 'B', ItemsAndUpgrades.Upgrade_Stone);
 
-        if (Config.CUpgrade_FallImmune)
+        if (ConfigurationHandler.CUpgrade_FallImmune)
             GameRegistry.addRecipe(new ItemStack(ItemsAndUpgrades.Upgrade_FallImmune),
                     " D ",
                     "ABA",
                     " D ",
                     'A', ItemsAndUpgrades.Sheet_FallImmune, 'B', ItemsAndUpgrades.Upgrade_Stone, 'D', Items.diamond);
 
-        if (Config.CUpgrade_WaterBreathing)
+        if (ConfigurationHandler.CUpgrade_WaterBreathing)
             GameRegistry.addRecipe(new ItemStack(ItemsAndUpgrades.Upgrade_WaterBreathing),
                     " X ",
                     "ABA",
                     " X ",
                     'A', ItemsAndUpgrades.Sheet_WaterBreathing, 'B', ItemsAndUpgrades.Upgrade_Stone, 'X', Items.glass_bottle);
 
-        if (Config.CUpgrade_WitherImmune)
+        if (ConfigurationHandler.CUpgrade_WitherImmune)
             GameRegistry.addRecipe(new ItemStack(ItemsAndUpgrades.Upgrade_WitherImmune),
                     "   ",
                     "ABA",
                     "   ",
                     'A', ItemsAndUpgrades.Sheet_WitherImmune, 'B', ItemsAndUpgrades.Upgrade_Stone);
 
-        if (Config.CFly)
+        if (ConfigurationHandler.CUpgrade_Fly)
             GameRegistry.addRecipe(new ItemStack(ItemsAndUpgrades.Upgrade_Fly),
                     "SCJ",
                     "QNE",
                     "SXJ",
                     'S', ItemsAndUpgrades.Sheet_Speed, 'C', Items.feather, 'Q', ItemsAndUpgrades.Upgrade_SpeedIII, 'X', ItemsAndUpgrades.Upgrade_FallImmune, 'N', Items.nether_star, 'E', ItemsAndUpgrades.Upgrade_JumpIII, 'J', ItemsAndUpgrades.Sheet_Jump);
 
-        if (Config.CUpgrade_SpeedI)
+        if (ConfigurationHandler.CUpgrade_SpeedI)
             GameRegistry.addRecipe(new ItemStack(ItemsAndUpgrades.Upgrade_SpeedI),
                     "   ",
                     "ABA",
                     "   ",
                     'A', ItemsAndUpgrades.Sheet_Speed, 'B', ItemsAndUpgrades.Upgrade_Stone);
 
-        if (Config.CUpgrade_SpeedII)
+        if (ConfigurationHandler.CUpgrade_SpeedII)
             GameRegistry.addRecipe(new ItemStack(ItemsAndUpgrades.Upgrade_SpeedII),
                     " G ",
                     "ABA",
                     " F ",
                     'A', ItemsAndUpgrades.Sheet_Speed, 'B', ItemsAndUpgrades.Upgrade_SpeedI, 'G', Items.sugar, 'F', Items.blaze_powder);
 
-        if (Config.CUpgrade_SpeedIII)
+        if (ConfigurationHandler.CUpgrade_SpeedIII)
             GameRegistry.addRecipe(new ItemStack(ItemsAndUpgrades.Upgrade_SpeedIII),
                     " T ",
                     "ABA",
                     " F ",
                     'A', ItemsAndUpgrades.Sheet_Speed, 'B', ItemsAndUpgrades.Upgrade_SpeedII, 'T', Items.ghast_tear, 'F', Items.diamond);
 
-        if (Config.CUpgrade_JumpI)
+        if (ConfigurationHandler.CUpgrade_JumpI)
             GameRegistry.addRecipe(new ItemStack(ItemsAndUpgrades.Upgrade_JumpI),
                     "   ",
                     "ABA",
                     "   ",
                     'A', ItemsAndUpgrades.Sheet_Jump, 'B', ItemsAndUpgrades.Upgrade_Stone);
 
-        if (Config.CUpgrade_JumpII)
+        if (ConfigurationHandler.CUpgrade_JumpII)
             GameRegistry.addRecipe(new ItemStack(ItemsAndUpgrades.Upgrade_JumpII),
                     " G ",
                     "ABA",
                     " F ",
                     'A', ItemsAndUpgrades.Sheet_Jump, 'B', ItemsAndUpgrades.Upgrade_JumpI, 'G', Items.feather, 'F', Items.blaze_powder);
 
-        if (Config.CUpgrade_JumpIII)
+        if (ConfigurationHandler.CUpgrade_JumpIII)
             GameRegistry.addRecipe(new ItemStack(ItemsAndUpgrades.Upgrade_JumpIII),
                     " T ",
                     "ABA",
                     " F ",
                     'A', ItemsAndUpgrades.Sheet_Jump, 'B', ItemsAndUpgrades.Upgrade_JumpII, 'T', Items.magma_cream, 'F', Items.diamond);
 
-        if (Config.CUpgrade_HasteI)
+        if (ConfigurationHandler.CUpgrade_HasteI)
             GameRegistry.addRecipe(new ItemStack(ItemsAndUpgrades.Upgrade_HasteI),
                     "   ",
                     "ABA",
                     "   ",
                     'A', ItemsAndUpgrades.Sheet_Haste, 'B', ItemsAndUpgrades.Upgrade_Stone);
 
-        if (Config.CUpgrade_HasteII)
+        if (ConfigurationHandler.CUpgrade_HasteII)
             GameRegistry.addRecipe(new ItemStack(ItemsAndUpgrades.Upgrade_HasteII),
                     " G ",
                     "ABA",
                     " F ",
                     'A', ItemsAndUpgrades.Sheet_Haste, 'B', ItemsAndUpgrades.Upgrade_HasteI, 'G', Items.gold_nugget, 'F', Items.blaze_powder);
 
-        if (Config.CUpgrade_HasteIII)
+        if (ConfigurationHandler.CUpgrade_HasteIII)
             GameRegistry.addRecipe(new ItemStack(ItemsAndUpgrades.Upgrade_HasteIII),
                     " T ",
                     "ABA",
                     " F ",
                     'A', ItemsAndUpgrades.Sheet_Haste, 'B', ItemsAndUpgrades.Upgrade_HasteII, 'T', Items.ghast_tear, 'F', Items.diamond_pickaxe);
 
-        if (Config.CUpgrade_PowerI)
+        if (ConfigurationHandler.CUpgrade_PowerI)
             GameRegistry.addRecipe(new ItemStack(ItemsAndUpgrades.Upgrade_PowerI),
                     "   ",
                     "ABA",
                     "   ",
                     'A', ItemsAndUpgrades.Sheet_Power, 'B', ItemsAndUpgrades.Upgrade_Stone);
 
-        if (Config.CUpgrade_PowerII)
+        if (ConfigurationHandler.CUpgrade_PowerII)
             GameRegistry.addRecipe(new ItemStack(ItemsAndUpgrades.Upgrade_PowerII),
                     " G ",
                     "ABA",
                     " F ",
                     'A', ItemsAndUpgrades.Sheet_Power, 'B', ItemsAndUpgrades.Upgrade_PowerI, 'G', Items.quartz, 'F', Items.blaze_powder);
 
-        if (Config.CUpgrade_PowerIII)
+        if (ConfigurationHandler.CUpgrade_PowerIII)
             GameRegistry.addRecipe(new ItemStack(ItemsAndUpgrades.Upgrade_PowerIII),
                     " T ",
                     "ABA",
                     " F ",
                     'A', ItemsAndUpgrades.Sheet_Power, 'B', ItemsAndUpgrades.Upgrade_PowerII, 'T', Items.ghast_tear, 'F', Items.diamond_sword);
 
-        if (Config.CNotLMagnetRing)
+        if (ConfigurationHandler.CNotLMagnetRing)
             GameRegistry.addRecipe(new ItemStack(ItemsAndUpgrades.Ring_NotLMagnet),
                     "DAC",
                     "ABA",
                     "DAC",
                     'A', Items.iron_ingot, 'B', ItemsAndUpgrades.Upgrade_Stone, 'D', new ItemStack(Items.dye, 1, 4), 'C', new ItemStack(Items.dye, 1, 1));
 
-        if (Config.CUpgrade_HealthRegen)
+        if (ConfigurationHandler.CUpgrade_HealthRegen)
             GameRegistry.addRecipe(new ItemStack(ItemsAndUpgrades.Upgrade_HealthRegen),
                     "   ",
                     "ABA",
                     "   ",
                     'A', ItemsAndUpgrades.Sheet_HealthRegen, 'B', ItemsAndUpgrades.Upgrade_Stone);
 
-        if (Config.CUpgrade_Invisibility)
+        if (ConfigurationHandler.CUpgrade_Invisibility)
             GameRegistry.addRecipe(new ItemStack(ItemsAndUpgrades.Upgrade_Invisibility),
                     " D ",
                     "ABA",
                     " D ",
                     'A', ItemsAndUpgrades.Sheet_Invisibility, 'B', ItemsAndUpgrades.Upgrade_Stone, 'D', Items.diamond);
 
-        if (Config.CUpgrade_NightVision)
+        if (ConfigurationHandler.CUpgrade_NightVision)
             GameRegistry.addRecipe(new ItemStack(ItemsAndUpgrades.Upgrade_NightVision),
                     " D ",
                     "ABA",
                     " D ",
                     'A', ItemsAndUpgrades.Sheet_NightVision, 'B', ItemsAndUpgrades.Upgrade_Stone, 'D', Items.diamond);
 
-        if (Config.CUpgrade_Growth)
+        if (ConfigurationHandler.CUpgrade_Growth)
             GameRegistry.addRecipe(new ItemStack(ItemsAndUpgrades.Upgrade_Growth),
                     "   ",
                     "ABA",
                     "   ",
                     'A', ItemsAndUpgrades.Sheet_Growth, 'B', ItemsAndUpgrades.Upgrade_Stone);
 
-        if (Config.CUpgrade_Harvest == true)
+        if (ConfigurationHandler.CUpgrade_Harvest)
             GameRegistry.addRecipe(new ItemStack(ItemsAndUpgrades.Upgrade_Harvest),
                     " X ",
                     "ABA",
                     " X ",
                     'A', ItemsAndUpgrades.Sheet_Harvest, 'B', ItemsAndUpgrades.Upgrade_Stone, 'X', Items.diamond);
 
-        if (Config.CUpgrade_Repair)
+        if (ConfigurationHandler.CUpgrade_Repair)
             GameRegistry.addRecipe(new ItemStack(ItemsAndUpgrades.Upgrade_Repair),
                     "   ",
                     "ABA",
                     "   ",
                     'A', ItemsAndUpgrades.Sheet_Repair, 'B', ItemsAndUpgrades.Upgrade_Stone);
+
+        if (ConfigurationHandler.CUpgrade_Vampire)
+            GameRegistry.addRecipe(new ItemStack(ItemsAndUpgrades.Upgrade_Vampire),
+                    " T ",
+                    "ABH",
+                    " P ",
+                    'A', ItemsAndUpgrades.Sheet_Power, 'B', ItemsAndUpgrades.Upgrade_Stone, 'H', ItemsAndUpgrades.Sheet_HealthRegen, 'T', Items.ghast_tear, 'P', Items.blaze_powder);
 
     }
 

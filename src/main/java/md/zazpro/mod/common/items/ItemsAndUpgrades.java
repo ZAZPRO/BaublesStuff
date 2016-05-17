@@ -14,6 +14,7 @@ package md.zazpro.mod.common.items;
 import md.zazpro.mod.client.CreativeTab;
 import md.zazpro.mod.client.ModInfo;
 import md.zazpro.mod.common.baubles.*;
+import md.zazpro.mod.common.config.ConfigurationHandler;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.Item;
@@ -53,6 +54,7 @@ public class ItemsAndUpgrades {
     public static Item Upgrade_PowerII;
     public static Item Upgrade_PowerIII;
     public static Item Upgrade_Repair;
+    public static Item Upgrade_Vampire;
     public static Item Sheet_FireImmune;
     public static Item Sheet_FallImmune;
     public static Item Sheet_Haste;
@@ -76,8 +78,8 @@ public class ItemsAndUpgrades {
         Belt_Core = new Belt_Core("Belt_Core");
         Pendant_Core = new Pendant_Core("Pendant_Core");
         Ring_Core = new Ring_Core("Ring_Core");
-        Ring_Magnet = new Ring_Magnet("Ring_Magnet", 16);
-        Ring_NotLMagnet = new Ring_NotLMagnet("Ring_NotLMagnet", 16);
+        Ring_Magnet = new Ring_Magnet("Ring_Magnet", ConfigurationHandler.MagnetRange);
+        Ring_NotLMagnet = new Ring_NotLMagnet("Ring_NotLMagnet", ConfigurationHandler.MagnetRange);
         Upgrade_HighStep = new ItemUpgrade("Upgrade_HighStep");
         Upgrade_SpeedI = new ItemUpgrade("Upgrade_SpeedI");
         Upgrade_SpeedII = new ItemUpgrade("Upgrade_SpeedII");
@@ -95,6 +97,7 @@ public class ItemsAndUpgrades {
         Upgrade_NightVision = new ItemUpgrade("Upgrade_NightVision");
         Upgrade_Growth = new ItemUpgrade("Upgrade_Growth");
         Upgrade_Harvest = new ItemUpgrade("Upgrade_Harvest");
+        Upgrade_Vampire = new ItemUpgrade("Upgrade_Vampire");
         Upgrade_HasteI = new ItemUpgrade("Upgrade_HasteI");
         Upgrade_HasteII = new ItemUpgrade("Upgrade_HasteII");
         Upgrade_HasteIII = new ItemUpgrade("Upgrade_HasteIII");
@@ -166,6 +169,7 @@ public class ItemsAndUpgrades {
         GameRegistry.register(Upgrade_Growth);
         GameRegistry.register(Upgrade_Harvest);
         GameRegistry.register(Upgrade_Repair);
+        GameRegistry.register(Upgrade_Vampire);
     }
 
     public static void registerRenders() {
@@ -216,6 +220,7 @@ public class ItemsAndUpgrades {
         reg(Upgrade_Growth);
         reg(Upgrade_Harvest);
         reg(Upgrade_Repair);
+        reg(Upgrade_Vampire);
     }
 
     private static void reg(Item item) {

@@ -11,8 +11,9 @@
 
 package md.zazpro.mod.common.baubles;
 
-import md.zazpro.mod.helper.EntityMoveHelper;
-import md.zazpro.mod.helper.Vector3;
+import md.zazpro.mod.common.baubles.base.RingBaseMagnet;
+import md.zazpro.mod.helper.ring.EntityMoveHelper;
+import md.zazpro.mod.helper.ring.Vector3;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.item.EntityXPOrb;

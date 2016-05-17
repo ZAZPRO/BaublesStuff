@@ -13,8 +13,10 @@ package md.zazpro.mod.common.baubles;
 
 import baubles.api.BaubleType;
 import baubles.common.lib.PlayerHandler;
-import md.zazpro.mod.common.items.ItemsAndUpgrades;
+import md.zazpro.mod.common.baubles.base.BaubleBase;
+import md.zazpro.mod.common.config.ConfigurationHandler;
 import md.zazpro.mod.helper.Wrapper;
+import md.zazpro.mod.helper.ring.RingUtils;
 import net.minecraft.block.Block;
 import net.minecraft.block.IGrowable;
 import net.minecraft.block.state.IBlockState;
@@ -23,7 +25,6 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.inventory.IInventory;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextFormatting;
@@ -95,7 +96,7 @@ public class Ring_Core extends BaubleBase {
             EntityPlayer player = Minecraft.getMinecraft().thePlayer;
             ItemStack itemStack1 = PlayerHandler.getPlayerBaubles(player).getStackInSlot(1);
             ItemStack itemStack2 = PlayerHandler.getPlayerBaubles(player).getStackInSlot(2);
-            if (isLegalb(itemStack1, itemStack2, "NightVision")) {
+            if (RingUtils.isLegalb(itemStack1, itemStack2, "NightVision")) {
                 float[] bright = Wrapper.INSTANCE.world().provider.getLightBrightnessTable();
                 for (int i = 0; i < bright.length; i++) {
                     bright[i] = 1.0F;
@@ -129,16 +130,16 @@ public class Ring_Core extends BaubleBase {
                 ItemStack itemStack2 = PlayerHandler.getPlayerBaubles(player).getStackInSlot(2);
                 World world = player.worldObj;
 
-                if (isLegalb(itemStack1, itemStack2, "Invisibility"))
+                if (RingUtils.isLegalb(itemStack1, itemStack2, "Invisibility"))
                     player.setInvisible(true);
 
-                if (isLegalb(itemStack1, itemStack2, "Growth"))
+                if (RingUtils.isLegalb(itemStack1, itemStack2, "Growth"))
                     UpdatePlant(player, world);
 
-                if (isLegalb(itemStack1, itemStack2, "Harvest"))
+                if (RingUtils.isLegalb(itemStack1, itemStack2, "Harvest"))
                     HarvestPlant(player, world);
 
-                if (isLegalb(itemStack1, itemStack2, "Repair"))
+                if (RingUtils.isLegalb(itemStack1, itemStack2, "Repair"))
                     RepairItem(player, world);
 
             }
@@ -160,13 +161,13 @@ public class Ring_Core extends BaubleBase {
                         IBlockState state = world.getBlockState(new BlockPos(ix, iy, iz));
 
                         if (block instanceof IPlantable)
-                            if (world.rand.nextInt(15) == 0)
+                            if (world.rand.nextInt(ConfigurationHandler.GrowthChance) == 0)
                                 block.updateTick(world, new BlockPos(ix, iy, iz), state, world.rand);
                     }
         }
     }
 
-    public void HarvestPlant(EntityPlayer Player, World world) {
+    private void HarvestPlant(EntityPlayer Player, World world) {
         if (!world.isRemote) {
             int range = 5;
             int verticalRange = 2;
@@ -195,7 +196,7 @@ public class Ring_Core extends BaubleBase {
 
     private void RepairItem(EntityPlayer player, World world) {
         if (!world.isRemote) {
-            if (world.rand.nextInt(20) == 0) {
+            if (world.rand.nextInt(ConfigurationHandler.RepairChance) == 0) {
                 IInventory inv = player.inventory;
 
                 for (int i = 0; i < inv.getSizeInventory(); i++) {
@@ -205,6 +206,9 @@ public class Ring_Core extends BaubleBase {
                         continue;
                     }
                     if (invStack.equals(player.getHeldItemMainhand()) && player.isSwingInProgress) {
+                        continue;
+                    }
+                    if (invStack.equals(player.getHeldItemOffhand()) && player.isSwingInProgress) {
                         continue;
                     }
                     if (!invStack.getHasSubtypes() && invStack.getMaxDamage() != 0 && invStack.getItemDamage() > 0) {
@@ -223,8 +227,8 @@ public class Ring_Core extends BaubleBase {
             ItemStack itemStack1 = PlayerHandler.getPlayerBaubles(player).getStackInSlot(1);
             ItemStack itemStack2 = PlayerHandler.getPlayerBaubles(player).getStackInSlot(2);
 
-            if (itemStack != null && isLegalf(itemStack1, itemStack2, "Haste")) {
-                float haste = getFloatFromBauble(itemStack1, itemStack2, "Haste");
+            if (itemStack != null && RingUtils.isLegalf(itemStack1, itemStack2, "Haste")) {
+                float haste = RingUtils.getFloatFromBauble(itemStack1, itemStack2, "Haste");
                 float f = event.getOriginalSpeed() + haste;
                 event.setNewSpeed(f);
             }
@@ -237,70 +241,14 @@ public class Ring_Core extends BaubleBase {
             EntityPlayer player = (EntityPlayer) event.getSource().getEntity();
             ItemStack itemStack1 = PlayerHandler.getPlayerBaubles(player).getStackInSlot(1);
             ItemStack itemStack2 = PlayerHandler.getPlayerBaubles(player).getStackInSlot(2);
-            if (isLegali(itemStack1, itemStack2, "Power")) {
-                float power = (float) getIntFromBauble(itemStack1, itemStack2, "Power");
+            if (RingUtils.isLegali(itemStack1, itemStack2, "Power")) {
+                float power = (float) RingUtils.getIntFromBauble(itemStack1, itemStack2, "Power");
                 float amount = event.getAmount() + power;
                 event.setAmount(amount);
             }
         }
     }
 
-
-    private boolean isLegalb(ItemStack is1, ItemStack is2, String tag) {
-        Item item1 = null;
-        Item item2 = null;
-        if (is1 != null)
-            item1 = is1.getItem();
-        if (is2 != null)
-            item2 = is2.getItem();
-        return ((is1 != null && item1 == ItemsAndUpgrades.Ring_Core && is1.getTagCompound() != null && is1.getTagCompound().getBoolean(tag))
-                || (is2 != null && item2 == ItemsAndUpgrades.Ring_Core && is2.getTagCompound() != null && is2.getTagCompound().getBoolean(tag)))
-                && (item1 != item2);
-    }
-
-    private boolean isLegalf(ItemStack is1, ItemStack is2, String tag) {
-        Item item1 = null;
-        Item item2 = null;
-        if (is1 != null)
-            item1 = is1.getItem();
-        if (is2 != null)
-            item2 = is2.getItem();
-        return ((is1 != null && item1 == ItemsAndUpgrades.Ring_Core && is1.getTagCompound() != null && (is1.getTagCompound().getFloat(tag) > 0))
-                || (is2 != null && item2 == ItemsAndUpgrades.Ring_Core && is2.getTagCompound() != null && (is2.getTagCompound().getFloat(tag) > 0)))
-                && (item1 != item2);
-    }
-
-    private float getFloatFromBauble(ItemStack is1, ItemStack is2, String tag) {
-        float f = 0;
-        if (is1 != null && is1.getTagCompound().getFloat(tag) > 0)
-            f = is1.getTagCompound().getFloat(tag);
-        else if (is2 != null && is2.getTagCompound().getFloat(tag) > 0)
-            f = is2.getTagCompound().getFloat(tag);
-
-        return f;
-    }
-
-    private boolean isLegali(ItemStack is1, ItemStack is2, String tag) {
-        Item item1 = null;
-        Item item2 = null;
-        if (is1 != null)
-            item1 = is1.getItem();
-        if (is2 != null)
-            item2 = is2.getItem();
-        return ((is1 != null && item1 == ItemsAndUpgrades.Ring_Core && is1.getTagCompound() != null && (is1.getTagCompound().getInteger(tag) > 0))
-                || (is2 != null && item2 == ItemsAndUpgrades.Ring_Core && is2.getTagCompound() != null && (is2.getTagCompound().getInteger(tag) > 0)))
-                && (item1 != item2);
-    }
-
-    private int getIntFromBauble(ItemStack is1, ItemStack is2, String tag) {
-        int i = 0;
-        if (is1 != null && is1.getTagCompound().getInteger(tag) > 0)
-            i = is1.getTagCompound().getInteger(tag);
-        else if (is2 != null && is2.getTagCompound().getInteger(tag) > 0)
-            i = is2.getTagCompound().getInteger(tag);
-
-        return i;
-    }
 
     @Override
     public BaubleType getBaubleType(ItemStack itemStack) {

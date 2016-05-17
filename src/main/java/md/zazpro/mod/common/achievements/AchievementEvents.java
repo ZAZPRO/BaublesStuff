@@ -85,6 +85,9 @@ public class AchievementEvents {
         if (event.crafting.getItem() == ItemsAndUpgrades.Upgrade_WaterBreathing) {
             event.player.addStat(BaublesStuffAchievement.craftWaterBreathing, 1);
         }
+        if (event.crafting.getItem() == ItemsAndUpgrades.Upgrade_Vampire) {
+            event.player.addStat(BaublesStuffAchievement.craftVampire, 1);
+        }
 
         if (event.crafting.getItem() == ItemsAndUpgrades.Upgrade_Invisibility) {
             event.player.addStat(BaublesStuffAchievement.craftInvisibility, 1);
@@ -115,6 +118,9 @@ public class AchievementEvents {
         }
         if (event.crafting.getItem() == ItemsAndUpgrades.Upgrade_Growth) {
             event.player.addStat(BaublesStuffAchievement.craftGrowth, 1);
+        }
+        if (event.crafting.getItem() == ItemsAndUpgrades.Upgrade_Harvest) {
+            event.player.addStat(BaublesStuffAchievement.craftHarvest, 1);
         }
         if (event.crafting.getItem() == ItemsAndUpgrades.Upgrade_Repair) {
             event.player.addStat(BaublesStuffAchievement.craftRepair, 1);

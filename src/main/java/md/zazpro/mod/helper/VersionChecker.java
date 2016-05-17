@@ -14,11 +14,12 @@ package md.zazpro.mod.helper;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import md.zazpro.mod.client.ModInfo;
-import md.zazpro.mod.common.config.Config;
+import md.zazpro.mod.common.config.ConfigurationHandler;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.util.text.TextFormatting;
+import net.minecraftforge.fml.common.versioning.ComparableVersion;
 
 import java.io.BufferedReader;
 import java.io.InputStream;
@@ -28,11 +29,24 @@ import java.net.URL;
 public class VersionChecker {
 
     public static void checkVersion(EntityPlayer player) {
-        if (Config.CUpdate) {
+        if (ConfigurationHandler.CUpdate) {
             try {
-                JsonObject object = new JsonParser().parse(getSite("https://widget.mcf.li/mc-mods/minecraft/236988-baubles-stuff.json", "utf8")).getAsJsonObject().get("versions").getAsJsonObject().get(ModInfo.MVERSION).getAsJsonArray().get(0).getAsJsonObject();
-                if (findWord(object.get("name").getAsString(), ModInfo.VERSION, false) == -1 && object.get("type").getAsString().equalsIgnoreCase("release")) {
-                    player.addChatComponentMessage(new TextComponentTranslation(TextFormatting.WHITE + "Update " + object.get("name") + " are available on "));
+                String jsonURL = "https://raw.githubusercontent.com/ZAZPRO/BaublesStuff/master/update/versions.json";
+                JsonObject main = new JsonParser().parse(getSite(jsonURL, "utf8")).getAsJsonObject();
+                JsonObject modLastVersion = main.get("promos").getAsJsonObject();
+                JsonObject changelog = main.getAsJsonObject().get(ModInfo.MVERSION).getAsJsonObject();
+
+                String newRecomVersion = modLastVersion.get(ModInfo.MVERSION + "-recommended").getAsString();
+                ComparableVersion recommended = new ComparableVersion(newRecomVersion);
+                ComparableVersion current = new ComparableVersion(ModInfo.VERSION);
+                int diff = recommended.compareTo(current);
+                if (diff == 0)
+                    System.out.print("Mod is up to date");
+                else {
+                    System.out.println(changelog.get(newRecomVersion).toString());
+                    System.out.print(main.get("homepage").toString().substring(1, 61));
+
+                    player.addChatComponentMessage(new TextComponentTranslation(TextFormatting.WHITE + "Update Baubles Stuff " + modLastVersion.get(ModInfo.MVERSION + "-recommended") + " is available on "));
                     ITextComponent component = ITextComponent.Serializer.jsonToComponent("{\n" +
                             "\"text\":\"Curse\",\n" +
                             "\"color\":\"yellow\",\n" +
@@ -45,10 +59,14 @@ public class VersionChecker {
                             "},\n" +
                             "\"clickEvent\":{\n" +
                             "\"action\":\"open_url\",\n" +
-                            "\"value\":\"" + object.get("url").getAsString() + "\"\n" +
+                            "\"value\":\"" + main.get("homepage").getAsString() + "\"\n" +
                             "}\n" +
                             "}");
                     player.addChatComponentMessage(component);
+                    player.addChatComponentMessage(new ITextComponent.Serializer().jsonToComponent("{\n" +
+                            "\"text\":\"" + changelog.get(newRecomVersion).getAsString() + "\"\n" +
+                            "}"
+                    ));
                 }
             } catch (Exception e) {
                 player.addChatComponentMessage(new TextComponentTranslation("[Baubles Stuff] Update check aborted!"));
@@ -76,27 +94,6 @@ public class VersionChecker {
 
         inputStream.close();
         return stringBuffer.toString();
-    }
-
-    public static int findWord(String from, String word, boolean ignoreCase) {
-        for (int i = 0; i < from.length(); i++)
-            if (equalsChar(from.charAt(i), word.charAt(0), ignoreCase))
-                if (checkAllWord(from, i, word, ignoreCase))
-                    return i;
-        return -1;
-    }
-
-    static boolean equalsChar(char a, char b, boolean ignoreCase) {
-        return ignoreCase ? (Character.toLowerCase(a) == Character.toLowerCase(b)) || (Character.toTitleCase(a) == Character.toTitleCase(b)) : a == b;
-    }
-
-    static boolean checkAllWord(String from, int charp, String word, boolean ignoreCase) {
-        if (from.length() >= charp + word.length()) {
-            for (int i = 1; i < word.length(); i++)
-                if (!equalsChar(from.charAt(charp + i), word.charAt(i), ignoreCase))
-                    return false;
-        } else return false;
-        return true;
     }
 }
 

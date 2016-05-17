@@ -11,6 +11,7 @@
 
 package md.zazpro.mod.common.baubles;
 
+import md.zazpro.mod.common.baubles.base.RingBaseMagnet;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.item.EntityXPOrb;

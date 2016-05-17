@@ -63,7 +63,7 @@ public class SpellBook extends Item {
     @SubscribeEvent
     public void onKill(LivingDropsEvent event) {
         if (event.getEntity() instanceof EntityPigZombie) {
-            if (randInt(0, 19) == 0)
+            if (randInt(1, 20) == 1)
                 event.getDrops().add(new EntityItem(event.getEntity().worldObj, event.getEntity().posX,
                         event.getEntity().posY, event.getEntity().posZ, new ItemStack(ItemsAndUpgrades.Spell_Book)));
         }

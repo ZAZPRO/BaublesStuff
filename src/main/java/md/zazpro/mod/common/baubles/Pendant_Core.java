@@ -12,6 +12,9 @@
 package md.zazpro.mod.common.baubles;
 
 import baubles.api.BaubleType;
+import baubles.common.lib.PlayerHandler;
+import md.zazpro.mod.common.baubles.base.BaubleBase;
+import md.zazpro.mod.common.config.ConfigurationHandler;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -20,12 +23,17 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.util.text.translation.I18n;
+import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.entity.living.LivingHurtEvent;
+import net.minecraftforge.fml.common.eventhandler.EventPriority;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.ReflectionHelper;
 import org.lwjgl.input.Keyboard;
 
 public class Pendant_Core extends BaubleBase {
     public Pendant_Core(String name) {
         super(name);
+        MinecraftForge.EVENT_BUS.register(this);
     }
 
     private static int getCooldown(ItemStack itemStack) {
@@ -48,6 +56,7 @@ public class Pendant_Core extends BaubleBase {
             list.add(TextFormatting.WHITE + I18n.translateToLocal("tooltip.pendant.WitherIm"));
             list.add(TextFormatting.WHITE + I18n.translateToLocal("tooltip.pendant.WaterBreath"));
             list.add(TextFormatting.WHITE + I18n.translateToLocal("tooltip.pendant.HealthRegen"));
+            list.add(TextFormatting.WHITE + I18n.translateToLocal("tooltip.pendant.Vampire"));
         } else if (itemStack.getTagCompound() != null) {
             Boolean FireImmune = itemStack.getTagCompound().getBoolean("FireImmune");
             if (FireImmune) list.add(TextFormatting.AQUA + I18n.translateToLocal("tooltip.pendant.FireIm"));
@@ -58,9 +67,12 @@ public class Pendant_Core extends BaubleBase {
             Boolean WaterBreathing = itemStack.getTagCompound().getBoolean("WaterBreathing");
             if (WaterBreathing)
                 list.add(TextFormatting.AQUA + I18n.translateToLocal("tooltip.pendant.WaterBreath"));
-            Boolean healthRegen = itemStack.getTagCompound().getBoolean("HealthRegen");
-            if (healthRegen)
+            Boolean HealthRegen = itemStack.getTagCompound().getBoolean("HealthRegen");
+            if (HealthRegen)
                 list.add(TextFormatting.AQUA + I18n.translateToLocal("tooltip.pendant.HealthRegen"));
+            Boolean Vampire = itemStack.getTagCompound().getBoolean("Vampire");
+            if (Vampire)
+                list.add(TextFormatting.AQUA + I18n.translateToLocal("tooltip.pendant.Vampire"));
         }
 
     }
@@ -110,13 +122,27 @@ public class Pendant_Core extends BaubleBase {
         }
     }
 
+    @SubscribeEvent(priority = EventPriority.LOWEST)
+    public void onHurt(LivingHurtEvent event) {
+        if (event.getSource().getEntity() instanceof EntityPlayer) {
+            EntityPlayer player = (EntityPlayer) event.getSource().getEntity();
+            ItemStack itemStack = PlayerHandler.getPlayerBaubles(player).getStackInSlot(0);
+            boolean Vampire = itemStack.getTagCompound().getBoolean("Vampire");
+            if (Vampire) {
+                if (player.getHealth() < player.getMaxHealth()) {
+                    player.heal(event.getAmount() / ConfigurationHandler.VampireAmount);
+                }
+            }
+        }
+    }
+
     @Override
     public BaubleType getBaubleType(ItemStack itemStack) {
         return BaubleType.AMULET;
     }
 
 
-    public void setFireImmune(Entity entity, boolean isImmune) {
+    private void setFireImmune(Entity entity, boolean isImmune) {
         ReflectionHelper.setPrivateValue(Entity.class, entity, isImmune, "isImmuneToFire", "field_70178_ae", "ag");
     }
 

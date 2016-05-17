@@ -71,6 +71,7 @@ public class RecipePendantCore implements IRecipe {
                     tag.setBoolean("WaterBreathing", false);
                     tag.setBoolean("WitherImmune", false);
                     tag.setBoolean("HealthRegen", false);
+                    tag.setBoolean("Vampire", false);
                     currentStack.setTagCompound(tag);
                 }
 
@@ -95,6 +96,10 @@ public class RecipePendantCore implements IRecipe {
 
                         if (currentStack.getItem() == ItemsAndUpgrades.Pendant_Core && currentStack2.getItem() == ItemsAndUpgrades.Upgrade_HealthRegen && currentStack != null && currentStack.hasTagCompound()) {
                             currentStack.getTagCompound().setBoolean("HealthRegen", true);
+                        }
+
+                        if (currentStack.getItem() == ItemsAndUpgrades.Pendant_Core && currentStack2.getItem() == ItemsAndUpgrades.Upgrade_Vampire && currentStack != null && currentStack.hasTagCompound()) {
+                            currentStack.getTagCompound().setBoolean("Vampire", true);
                         }
 
                     }

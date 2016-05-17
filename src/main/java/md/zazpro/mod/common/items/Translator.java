@@ -12,6 +12,7 @@
 package md.zazpro.mod.common.items;
 
 import md.zazpro.mod.client.CreativeTab;
+import md.zazpro.mod.common.config.ConfigurationHandler;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.monster.EntityPigZombie;
 import net.minecraft.entity.player.EntityPlayer;
@@ -31,7 +32,7 @@ public class Translator extends Item {
         MinecraftForge.EVENT_BUS.register(this);
         this.setUnlocalizedName("Translator");
         setRegistryName("Translator");
-        this.setMaxDamage(17);
+        this.setMaxDamage(ConfigurationHandler.TranslatorChance + 1);
         this.setMaxStackSize(1);
         this.setCreativeTab(CreativeTab.tabBaublesStuff);
     }
@@ -67,7 +68,7 @@ public class Translator extends Item {
     @SubscribeEvent
     public void onKill(LivingDropsEvent event) {
         if (event.getEntity() instanceof EntityPigZombie) {
-            if (randInt(0, 14) == 0)
+            if (randInt(1, ConfigurationHandler.TranslatorChance) == 1)
                 event.getDrops().add(new EntityItem(event.getEntity().worldObj, event.getEntity().posX,
                         event.getEntity().posY, event.getEntity().posZ, new ItemStack(ItemsAndUpgrades.Translator)));
         }

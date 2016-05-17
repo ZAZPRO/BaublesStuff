@@ -14,6 +14,7 @@ package md.zazpro.mod.common.baubles;
 import baubles.api.BaubleType;
 import baubles.common.container.InventoryBaubles;
 import baubles.common.lib.PlayerHandler;
+import md.zazpro.mod.common.baubles.base.BaubleBase;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
