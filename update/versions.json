@@ -9,13 +9,13 @@
     "1.7.10-recommended": "2.1.2"
   },
   "1.9": {
-    "2.0.9": "- New upgrades!/n- Config Gui./n- New config options./n- Forge version check system implemented./n- A lot of optimisation stuff./n- RArmor GUI integration./n- Bug fixes.",
-	"2.0.8": "- Crash fix/n- Magnet fix/n- Render fix/n- Russian translation (Without achievements)"
+    "2.0.9": "- New upgrades!\n- Config Gui.\n- New config options.\n- Forge version check system implemented.\n- A lot of optimisation stuff.\n- RArmor GUI integration.\n- Bug fixes.",
+	"2.0.8": "- Crash fix\n- Magnet fix\n- Render fix\n- Russian translation (Without achievements)"
   },
   "1.8.9": {
-	"2.0.3": "-Fully rewrite Ring code. It is more optimized  and without bugs (I hope)./n-Changed IRecipe (Belt,Pendant,Ring) recipe system./n-Bug fixes"
+	"2.0.3": "-Fully rewrite Ring code. It is more optimized  and without bugs (I hope).\n-Changed IRecipe (Belt,Pendant,Ring) recipe system.\n-Bug fixes"
   },
   "1.7.10": {
-	"2.1.2": "- Night Vision/Ring bug fix./n- Power Upgrade bug fix."
+	"2.1.2": "- Night Vision/Ring bug fix.\n- Power Upgrade bug fix."
   }
 }
