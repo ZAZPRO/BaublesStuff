@@ -28,7 +28,7 @@ public class BSGuiConfig extends GuiConfig {
                 ModInfo.MODID,
                 false,
                 false,
-                "Babules Stuff configuration");
+                "Baubles Stuff configuration");
     }
 
     /**

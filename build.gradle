@@ -38,7 +38,11 @@ apply plugin: 'net.minecraftforge.gradle.forge'
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
+<<<<<<< HEAD
 version = "2.0.10"
+=======
+version = "2.0.9"
+>>>>>>> origin/master
 group = "md.zazpro.mod" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = "baublesstuff"
 
