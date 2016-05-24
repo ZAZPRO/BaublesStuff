@@ -126,11 +126,14 @@ public class Pendant_Core extends BaubleBase {
     public void onHurt(LivingHurtEvent event) {
         if (event.getSource().getEntity() instanceof EntityPlayer) {
             EntityPlayer player = (EntityPlayer) event.getSource().getEntity();
-            ItemStack itemStack = PlayerHandler.getPlayerBaubles(player).getStackInSlot(0);
-            boolean Vampire = itemStack.getTagCompound().getBoolean("Vampire");
-            if (Vampire) {
-                if (player.getHealth() < player.getMaxHealth()) {
-                    player.heal(event.getAmount() / ConfigurationHandler.VampireAmount);
+            ItemStack itemStack = null;
+            if (PlayerHandler.getPlayerBaubles(player).getStackInSlot(0)!=null && PlayerHandler.getPlayerBaubles(player).getStackInSlot(0).hasTagCompound()) {
+                itemStack = PlayerHandler.getPlayerBaubles(player).getStackInSlot(0);
+                boolean Vampire = itemStack.getTagCompound().getBoolean("Vampire");
+                if (Vampire) {
+                    if (player.getHealth() < player.getMaxHealth()) {
+                        player.heal(event.getAmount() / ConfigurationHandler.VampireAmount);
+                    }
                 }
             }
         }

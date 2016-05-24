@@ -1,14 +1,15 @@
 {
   "homepage": "http://minecraft.curseforge.com/projects/baubles-stuff/files",
   "promos": {
-    "1.9-latest": "2.0.9",
-    "1.9-recommended": "2.0.9",
+    "1.9-latest": "2.0.10",
+    "1.9-recommended": "2.0.10",
 	"1.8.9-latest": "2.0.3",
     "1.8.9-recommended": "2.0.3",
 	"1.7.10-latest": "2.1.2",
     "1.7.10-recommended": "2.1.2"
   },
   "1.9": {
+	"2.0.10": "- Mob Hurt bug fix.",
     "2.0.9": "- New upgrades!\n- Config Gui.\n- New config options.\n- New version check system.\n- Forge version check system implemented.\n- A lot of optimisation stuff.\n- RArmor GUI integration.\n- New achievements.\n- Bug fixes.",
 	"2.0.8": "- Crash fix\n- Magnet fix\n- Render fix\n- Russian translation (Without achievements)"
   },

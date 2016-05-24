@@ -43,9 +43,6 @@ public class VersionChecker {
                 if (diff == 0)
                     System.out.print("Mod is up to date");
                 else {
-                    System.out.println(changelog.get(newRecomVersion).toString());
-                    System.out.print(main.get("homepage").toString().substring(1, 61));
-
                     player.addChatComponentMessage(new TextComponentTranslation(TextFormatting.WHITE + "Update Baubles Stuff " + modLastVersion.get(ModInfo.MVERSION + "-recommended") + " is available on "));
                     ITextComponent component = ITextComponent.Serializer.jsonToComponent("{\n" +
                             "\"text\":\"Curse\",\n" +
