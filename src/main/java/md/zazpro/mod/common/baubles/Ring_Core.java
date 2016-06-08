@@ -92,7 +92,7 @@ public class Ring_Core extends BaubleBase {
     @SubscribeEvent
     @SideOnly(Side.CLIENT)
     public void clientTick(TickEvent.ClientTickEvent event) {
-        if (Minecraft.getMinecraft().thePlayer != null && !NightVision) {
+        if (Minecraft.getMinecraft().thePlayer != null && Minecraft.getMinecraft().theWorld != null && !NightVision) {
             EntityPlayer player = Minecraft.getMinecraft().thePlayer;
             ItemStack itemStack1 = PlayerHandler.getPlayerBaubles(player).getStackInSlot(1);
             ItemStack itemStack2 = PlayerHandler.getPlayerBaubles(player).getStackInSlot(2);
