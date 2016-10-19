@@ -1,0 +1,40 @@
+{
+	"pools": [
+		{	
+			"name": "baublesstuff:loot_table_1",
+			"rolls": 1,
+			"entries": [
+				{
+					"type": "item",
+					"name": "baublesstuff:Upgrade_Stone",
+					"weight": 120
+				},
+				{
+					"type": "item",
+					"name": "baublesstuff:Upgrade_HasteI",
+					"weight": 60
+				},
+				{
+					"type": "item",
+					"name": "baublesstuff:Upgrade_SpeedI",
+					"weight": 60
+				},
+				{
+					"type": "item",
+					"name": "baublesstuff:Upgrade_JumpI",
+					"weight": 60
+				},
+				{
+					"type": "item",
+					"name": "baublesstuff:Upgrade_PowerI",
+					"weight": 60
+				},
+				{
+					"type": "item",
+					"name": "minecraft:glowstone",
+					"weight": 100
+				}
+			]
+		}
+	]
+}

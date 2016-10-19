@@ -157,6 +157,9 @@ achievement.bs_craftHarvest.desc=Always wanted^^
 achievement.bs_craftExtractor=Craft Extractor
 achievement.bs_craftExtractor.desc=Just right click it!
 
+#Village
+entity.Villager.baublesmaster=Ювелир
+
 #Thaumcraft
 item.Sheet_WarpProtection.name=Warp Protection Paper
 item.Upgrade_WarpProtection.name=Warp Protection Upgrade

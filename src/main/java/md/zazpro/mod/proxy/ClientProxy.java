@@ -11,10 +11,7 @@
 
 package md.zazpro.mod.proxy;
 
-import md.zazpro.mod.BaublesStuff;
 import md.zazpro.mod.common.blocks.BlockRegister;
-import md.zazpro.mod.common.config.ConfigurationHandler;
-import md.zazpro.mod.common.integration.rarmor.GuiIntegration;
 import md.zazpro.mod.common.items.ItemsAndUpgrades;
 import md.zazpro.mod.helper.UpdateHandler;
 import net.minecraftforge.common.MinecraftForge;
@@ -36,10 +33,6 @@ public class ClientProxy extends CommonProxy {
         ItemsAndUpgrades.registerRenders();
         BlockRegister.registerRenders();
 
-        //Rarmor
-        if (BaublesStuff.isRarmor && ConfigurationHandler.CRarmor) {
-            GuiIntegration.proxyReg();
-        }
     }
 
     @Override

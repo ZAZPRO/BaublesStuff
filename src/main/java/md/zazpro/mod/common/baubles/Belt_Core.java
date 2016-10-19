@@ -12,8 +12,8 @@
 package md.zazpro.mod.common.baubles;
 
 import baubles.api.BaubleType;
-import baubles.common.container.InventoryBaubles;
-import baubles.common.lib.PlayerHandler;
+import baubles.api.BaublesApi;
+import baubles.api.cap.IBaublesItemHandler;
 import md.zazpro.mod.common.baubles.base.BaubleBase;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -80,7 +80,7 @@ public class Belt_Core extends BaubleBase {
             if (e instanceof EntityPlayer) {
                 EntityPlayer player = (EntityPlayer) e;
                 if (player.moveForward > 0F)
-                    player.moveFlying(0F, 1F, player.capabilities.isFlying ? 0.030F : (speed * 0.05F));
+                    player.moveRelative(0F, 1F, player.capabilities.isFlying ? 0.030F : (speed * 0.05F));
 
                 if (stepHeight) {
                     if (player.worldObj.isRemote)
@@ -96,7 +96,7 @@ public class Belt_Core extends BaubleBase {
     public void onPlayerJump(LivingJumpEvent event) {
         if (event.getEntityLiving() instanceof EntityPlayer) {
             EntityPlayer player = (EntityPlayer) event.getEntityLiving();
-            ItemStack itemStack = PlayerHandler.getPlayerBaubles(player).getStackInSlot(3);
+            ItemStack itemStack = BaublesApi.getBaublesHandler(player).getStackInSlot(3);
 
             if (itemStack != null && itemStack.getTagCompound() != null && itemStack.getItem() instanceof Belt_Core) {
                 float jump = itemStack.getTagCompound().getFloat("jump");
@@ -152,7 +152,7 @@ public class Belt_Core extends BaubleBase {
 
             if (!event.player.worldObj.isRemote) {
                 EntityPlayer entityPlayer = event.player;
-                InventoryBaubles baubles = PlayerHandler.getPlayerBaubles(entityPlayer);
+                IBaublesItemHandler baubles = BaublesApi.getBaublesHandler(entityPlayer);
 
                 ItemStack itemStack = baubles.getStackInSlot(3);
                 Item item;
@@ -172,7 +172,7 @@ public class Belt_Core extends BaubleBase {
 
             if (!event.player.worldObj.isRemote) {
                 EntityPlayer entityPlayer = event.player;
-                InventoryBaubles baubles = PlayerHandler.getPlayerBaubles(entityPlayer);
+                IBaublesItemHandler baubles = BaublesApi.getBaublesHandler(entityPlayer);
 
                 ItemStack itemStack = baubles.getStackInSlot(3);
                 Item item;
@@ -190,12 +190,12 @@ public class Belt_Core extends BaubleBase {
     public void onLivingUpdate(LivingUpdateEvent event) {
         if (event.getEntityLiving() instanceof EntityPlayer && event.getEntityLiving().worldObj.isRemote) {
             EntityPlayer player = (EntityPlayer) event.getEntityLiving();
-            InventoryBaubles baubles = PlayerHandler.getPlayerBaubles(player);
+            IBaublesItemHandler baubles = BaublesApi.getBaublesHandler(player);
 
             boolean highStepListed = playersWith1Step.contains(player.getGameProfile().getName());
             boolean hasHighStep = baubles.getStackInSlot(3) != null && baubles.getStackInSlot(3).getItem() == this;
             boolean stepHeight = false;
-            ItemStack itemStack = PlayerHandler.getPlayerBaubles(player).getStackInSlot(3);
+            ItemStack itemStack = baubles.getStackInSlot(3);
             if (itemStack != null && itemStack.hasTagCompound() && itemStack.getItem() == this)
                 stepHeight = itemStack.getTagCompound().getBoolean("highStep");
 

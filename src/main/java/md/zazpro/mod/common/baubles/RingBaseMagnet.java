@@ -1,12 +1,14 @@
 package md.zazpro.mod.common.baubles;
 
 import baubles.api.BaubleType;
-import baubles.common.container.InventoryBaubles;
-import baubles.common.lib.PlayerHandler;
+import baubles.api.BaublesApi;
+import baubles.api.cap.IBaublesItemHandler;
+import md.zazpro.mod.common.baubles.base.BaubleBase;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.math.AxisAlignedBB;
@@ -23,7 +25,7 @@ import java.util.List;
  * This class was created by <zazpro>. It's distributed as
  * part of the Baubles Stuff Mod. Get the Source Code in github:
  * https://github.com/ZAZPRO/BaublesStuff
- *
+ * <p>
  * Baubles Stuff is Open Source and distributed under the
  * Baubles Stuff License: https://github.com/ZAZPRO/BaublesStuff/blob/master/LICENSE.md
  * Created by zazpro on 5/16/2016.
@@ -92,7 +94,7 @@ public abstract class RingBaseMagnet extends BaubleBase {
             for (int z2 = z - range; z2 < z + range; z2++) {
                 for (int y2 = y - range; y2 < y + range; y2++) {
                     ItemStack itemStack = item.getEntityItem();
-                    if (itemStack == null || BLACKLIST.contains(itemRegistry.getNameForObject(itemStack.getItem()))) {
+                    if (itemStack == null || BLACKLIST.contains(Item.REGISTRY.getNameForObject(itemStack.getItem()).toString())) {
                         return false;
                     }
                 }
@@ -103,8 +105,8 @@ public abstract class RingBaseMagnet extends BaubleBase {
 
     @SubscribeEvent
     public void onTossItem(ItemTossEvent event) {
-        InventoryBaubles inv = PlayerHandler.getPlayerBaubles(event.getPlayer());
-        for (int i = 0; i < inv.getSizeInventory(); i++) {
+        IBaublesItemHandler inv = BaublesApi.getBaublesHandler(event.getPlayer());
+        for (int i = 0; i < inv.getSlots(); i++) {
             ItemStack itemStack = inv.getStackInSlot(i);
             if (itemStack != null && itemStack.getTagCompound() != null && itemStack.getItem() instanceof RingBaseMagnet) {
                 setCooldown(itemStack, 100);

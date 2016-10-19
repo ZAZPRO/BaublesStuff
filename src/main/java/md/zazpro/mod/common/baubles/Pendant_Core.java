@@ -12,7 +12,7 @@
 package md.zazpro.mod.common.baubles;
 
 import baubles.api.BaubleType;
-import baubles.common.lib.PlayerHandler;
+import baubles.api.BaublesApi;
 import md.zazpro.mod.common.baubles.base.BaubleBase;
 import md.zazpro.mod.common.config.ConfigurationHandler;
 import net.minecraft.block.material.Material;
@@ -102,7 +102,7 @@ public class Pendant_Core extends BaubleBase {
                     player.fallDistance = 0;
                 }
                 Boolean WaterBreathing = itemStack.getTagCompound().getBoolean("WaterBreathing");
-                if (WaterBreathing && player.isInsideOfMaterial(Material.water)) {
+                if (WaterBreathing && player.isInsideOfMaterial(Material.WATER)) {
                     player.setAir(280);
                 }
                 Boolean WitherImmune = itemStack.getTagCompound().getBoolean("WitherImmune");
@@ -127,8 +127,8 @@ public class Pendant_Core extends BaubleBase {
         if (event.getSource().getEntity() instanceof EntityPlayer) {
             EntityPlayer player = (EntityPlayer) event.getSource().getEntity();
             ItemStack itemStack = null;
-            if (PlayerHandler.getPlayerBaubles(player).getStackInSlot(0)!=null && PlayerHandler.getPlayerBaubles(player).getStackInSlot(0).hasTagCompound()) {
-                itemStack = PlayerHandler.getPlayerBaubles(player).getStackInSlot(0);
+            if (BaublesApi.getBaublesHandler(player).getStackInSlot(0) != null && BaublesApi.getBaublesHandler(player).getStackInSlot(0).hasTagCompound()) {
+                itemStack = BaublesApi.getBaublesHandler(player).getStackInSlot(0);
                 boolean Vampire = itemStack.getTagCompound().getBoolean("Vampire");
                 if (Vampire) {
                     if (player.getHealth() < player.getMaxHealth()) {

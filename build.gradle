@@ -1,101 +1,50 @@
-
-/*
- * This class (build.gradle) was created by <zazpro>. It's distributed as
- * part of the Baubles Stuff Mod. Get the Source Code in github:
- * https://github.com/ZAZPRO/BaublesStuff
- *
- * Baubles Stuff is Open Source and distributed under the
- * Baubles Stuff License: https://github.com/ZAZPRO/BaublesStuff/blob/master/LICENSE.MD
- *
- * © 2016 zazpro
- */
-
-//Buildscript copied from Thaumic Tinkerer build.gradle, a large part of which was made by nekosune
 buildscript {
     repositories {
-        mavenCentral()
-        maven {
-            name = "forge"
-            url = "http://files.minecraftforge.net/maven"
-        }
-        maven {
-            name = "sonatype"
-            url = "https://oss.sonatype.org/content/repositories/snapshots/"
-        }
-        maven {
-            url 'https://oss.sonatype.org/content/groups/public'
-        }
-        mavenLocal()
+        jcenter()
+        maven { url = "http://files.minecraftforge.net/maven" }
     }
     dependencies {
-        classpath 'net.minecraftforge.gradle:ForgeGradle:2.1-SNAPSHOT'
+        classpath 'net.minecraftforge.gradle:ForgeGradle:2.2-SNAPSHOT'
     }
 }
-
-
 apply plugin: 'net.minecraftforge.gradle.forge'
+//Only edit below this line, the above code adds and enables the nessasary things for Forge to be setup.
 
-sourceCompatibility = 1.8
-targetCompatibility = 1.8
 
-<<<<<<< HEAD
-version = "2.0.10"
-=======
-version = "2.0.9"
->>>>>>> origin/master
-group = "md.zazpro.mod" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
+version = "2.0.11"
+group= "md.zazpro.mod" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = "baublesstuff"
 
-minecraft {
-    version = "1.9-12.16.1.1887"
-    runDir = "run"
-    mappings = "snapshot_20160312"
-    replace '@version@', project.version
-    replace '@keySecret@', System.env.SECRET != null ? "$System.env.SECRET" : ''
-
+sourceCompatibility = targetCompatibility = "1.6" // Need this here so eclipse task generates correctly.
+compileJava {
+    sourceCompatibility = targetCompatibility = "1.6"
 }
 
-if (System.getenv("BUILD_NUMBER") != null)
-    version = "${System.getenv().BUILD_NUMBER}"
-if (project.hasProperty("releaseType"))
-    if (project.releaseType == "ALPHA")
-        version = "alpha-" + version
-
-
-jar {
-    manifest {
-        attributes 'FMLAT': 'baubles_at.cfg'
-    }
+minecraft {
+    version = "1.10.2-12.18.2.2099"
+    runDir = "run"
 }
 
 dependencies {
-    compile files("lib/Baubles-1.9-1.2.0.0-deobf.jar")
-	compile files("lib/Rarmor-0.7.1.jar")
+	compile files("lib/Baubles-1.10.2-1.3.BETA11-deobf.jar")
 }
 
 processResources
-        {
-            from(sourceSets.main.resources.srcDirs) {
-                include 'mcmod.info'
-                expand 'version': project.version, 'MCversion': project.minecraft.version
-            }
-            from(sourceSets.main.resources.srcDirs) {
-                exclude 'mcmod.info'
-            }
-        }
+{
+    // this will ensure that this task is redone when the versions change.
+    inputs.property "version", project.version
+    inputs.property "mcversion", project.minecraft.version
 
-task deobfJar(type: Jar) {
-    from sourceSets.main.output
-    classifier = 'dev'
-}
-
-sourceSets {
-    main {
-        java {
-            srcDir 'src/main/java'
-        }
-        resources {
-            srcDir 'src/main/resources'
-        }
+    // replace stuff in mcmod.info, nothing else
+    from(sourceSets.main.resources.srcDirs) {
+        include 'mcmod.info'
+                
+        // replace version and mcversion
+        expand 'version':project.version, 'mcversion':project.minecraft.version
+    }
+        
+    // copy everything else, thats not the mcmod.info
+    from(sourceSets.main.resources.srcDirs) {
+        exclude 'mcmod.info'
     }
 }

@@ -65,6 +65,11 @@ public class Translator extends Item {
         return true;
     }
 
+    @Override
+    public boolean isRepairable() {
+        return false;
+    }
+
     @SubscribeEvent
     public void onKill(LivingDropsEvent event) {
         if (event.getEntity() instanceof EntityPigZombie) {

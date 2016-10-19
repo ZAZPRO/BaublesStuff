@@ -30,7 +30,7 @@ import net.minecraftforge.common.util.Constants;
 
 public class UpgradeExtractor extends BlockContainer {
     public UpgradeExtractor() {
-        super(Material.rock);
+        super(Material.ROCK);
         this.setUnlocalizedName("UpgradeExtractor");
         this.setRegistryName("UpgradeExtractor");
         this.setCreativeTab(CreativeTab.tabBaublesStuff);

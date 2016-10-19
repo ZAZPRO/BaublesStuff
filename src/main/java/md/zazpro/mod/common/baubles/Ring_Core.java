@@ -12,7 +12,7 @@
 package md.zazpro.mod.common.baubles;
 
 import baubles.api.BaubleType;
-import baubles.common.lib.PlayerHandler;
+import baubles.api.BaublesApi;
 import md.zazpro.mod.common.baubles.base.BaubleBase;
 import md.zazpro.mod.common.config.ConfigurationHandler;
 import md.zazpro.mod.helper.Wrapper;
@@ -47,6 +47,7 @@ import org.lwjgl.input.Keyboard;
 public class Ring_Core extends BaubleBase {
 
     private boolean NightVision = false;
+    private boolean checkForNightVision = false;
 
     public Ring_Core(String name) {
         super(name);
@@ -92,18 +93,17 @@ public class Ring_Core extends BaubleBase {
     @SubscribeEvent
     @SideOnly(Side.CLIENT)
     public void clientTick(TickEvent.ClientTickEvent event) {
-        if (Minecraft.getMinecraft().thePlayer != null && !NightVision) {
+        if (Minecraft.getMinecraft().thePlayer != null && Wrapper.INSTANCE.world()!=null && checkForNightVision) {
             EntityPlayer player = Minecraft.getMinecraft().thePlayer;
-            ItemStack itemStack1 = PlayerHandler.getPlayerBaubles(player).getStackInSlot(1);
-            ItemStack itemStack2 = PlayerHandler.getPlayerBaubles(player).getStackInSlot(2);
-            if (RingUtils.isLegalb(itemStack1, itemStack2, "NightVision")) {
+            ItemStack itemStack1 = BaublesApi.getBaublesHandler(player).getStackInSlot(1);
+            ItemStack itemStack2 = BaublesApi.getBaublesHandler(player).getStackInSlot(2);
+            if (RingUtils.isLegalb(itemStack1, itemStack2, "NightVision") && NightVision == false) {
                 float[] bright = Wrapper.INSTANCE.world().provider.getLightBrightnessTable();
                 for (int i = 0; i < bright.length; i++) {
                     bright[i] = 1.0F;
-                    NightVision = false;
                 }
-
-            } else {
+                NightVision = true;
+            } else if (!RingUtils.isLegalb(itemStack1, itemStack2, "NightVision") && NightVision){
                 Wrapper.INSTANCE.world().provider.registerWorld(Wrapper.INSTANCE.world());
                 NightVision = false;
             }
@@ -112,13 +112,13 @@ public class Ring_Core extends BaubleBase {
 
     @Override
     public void onEquipped(ItemStack itemStack, EntityLivingBase e) {
-        NightVision = true;
+        checkForNightVision = true;
     }
 
     @Override
     public void onUnequipped(ItemStack itemStack, EntityLivingBase e) {
         e.setInvisible(false);
-        NightVision = true;
+        checkForNightVision = true;
     }
 
     @Override
@@ -126,8 +126,8 @@ public class Ring_Core extends BaubleBase {
         if (itemStack.getTagCompound() != null) {
             if (e instanceof EntityPlayer) {
                 EntityPlayer player = (EntityPlayer) e;
-                ItemStack itemStack1 = PlayerHandler.getPlayerBaubles(player).getStackInSlot(1);
-                ItemStack itemStack2 = PlayerHandler.getPlayerBaubles(player).getStackInSlot(2);
+                ItemStack itemStack1 = BaublesApi.getBaublesHandler(player).getStackInSlot(1);
+                ItemStack itemStack2 = BaublesApi.getBaublesHandler(player).getStackInSlot(2);
                 World world = player.worldObj;
 
                 if (RingUtils.isLegalb(itemStack1, itemStack2, "Invisibility"))
@@ -180,9 +180,9 @@ public class Ring_Core extends BaubleBase {
                     for (int iy = posY - verticalRange; iy <= posY + verticalRange; iy++) {
                         BlockPos pos = new BlockPos(ix, iy, iz);
                         Block block = world.getBlockState(pos).getBlock();
-                        if (block == Blocks.melon_stem || block == Blocks.pumpkin_stem)
+                        if (block == Blocks.MELON_STEM || block == Blocks.PUMPKIN_STEM)
                             continue;
-                        if (block == Blocks.melon_block || block == Blocks.pumpkin) {
+                        if (block == Blocks.MELON_BLOCK || block == Blocks.PUMPKIN) {
                             block.dropBlockAsItem(world, pos, world.getBlockState(pos), 0);
                             world.setBlockToAir(pos);
                         }
@@ -224,8 +224,8 @@ public class Ring_Core extends BaubleBase {
         if (event.getEntityLiving() instanceof EntityPlayer) {
             EntityPlayer player = (EntityPlayer) event.getEntityLiving();
             ItemStack itemStack = player.getHeldItemMainhand();
-            ItemStack itemStack1 = PlayerHandler.getPlayerBaubles(player).getStackInSlot(1);
-            ItemStack itemStack2 = PlayerHandler.getPlayerBaubles(player).getStackInSlot(2);
+            ItemStack itemStack1 = BaublesApi.getBaublesHandler(player).getStackInSlot(1);
+            ItemStack itemStack2 = BaublesApi.getBaublesHandler(player).getStackInSlot(2);
 
             if (itemStack != null && RingUtils.isLegalf(itemStack1, itemStack2, "Haste")) {
                 float haste = RingUtils.getFloatFromBauble(itemStack1, itemStack2, "Haste");
@@ -239,8 +239,8 @@ public class Ring_Core extends BaubleBase {
     public void onHurt(LivingHurtEvent event) {
         if (event.getSource().getEntity() instanceof EntityPlayer) {
             EntityPlayer player = (EntityPlayer) event.getSource().getEntity();
-            ItemStack itemStack1 = PlayerHandler.getPlayerBaubles(player).getStackInSlot(1);
-            ItemStack itemStack2 = PlayerHandler.getPlayerBaubles(player).getStackInSlot(2);
+            ItemStack itemStack1 = BaublesApi.getBaublesHandler(player).getStackInSlot(1);
+            ItemStack itemStack2 = BaublesApi.getBaublesHandler(player).getStackInSlot(2);
             if (RingUtils.isLegali(itemStack1, itemStack2, "Power")) {
                 float power = (float) RingUtils.getIntFromBauble(itemStack1, itemStack2, "Power");
                 float amount = event.getAmount() + power;
@@ -257,17 +257,17 @@ public class Ring_Core extends BaubleBase {
 
     @SubscribeEvent(priority = EventPriority.LOWEST)
     public void onPlayerLoggedInEvent(PlayerLoggedInEvent event) {
-        NightVision = true;
+        checkForNightVision = true;
     }
 
     @SubscribeEvent(priority = EventPriority.LOWEST)
     public void onPlayerChangedDimensionEvent(PlayerChangedDimensionEvent event) {
-        NightVision = true;
+        checkForNightVision = true;
     }
 
     @SubscribeEvent(priority = EventPriority.LOWEST)
     public void onPlayerLoggedOutEvent(PlayerLoggedOutEvent event) {
-        NightVision = true;
+        checkForNightVision = true;
     }
 
 }

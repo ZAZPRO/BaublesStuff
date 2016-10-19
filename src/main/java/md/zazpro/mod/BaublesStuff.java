@@ -23,6 +23,7 @@ import md.zazpro.mod.common.recipe.RecipeBeltCore;
 import md.zazpro.mod.common.recipe.RecipePendantCore;
 import md.zazpro.mod.common.recipe.RecipeRingCore;
 import md.zazpro.mod.common.tileentity.TEExtractor;
+import md.zazpro.mod.common.village.VillageStuff;
 import md.zazpro.mod.proxy.CommonProxy;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.Loader;
@@ -37,7 +38,7 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.oredict.RecipeSorter;
 import net.minecraftforge.oredict.RecipeSorter.Category;
 
-@Mod(modid = ModInfo.MODID, version = ModInfo.VERSION, name = ModInfo.NAME, guiFactory = ModInfo.GUI_FACTORY_CLASS, updateJSON = ModInfo.UPDATE_LINK, dependencies = "required-after:Baubles; after:rarmor")
+@Mod(modid = ModInfo.MODID, version = ModInfo.VERSION, name = ModInfo.NAME, guiFactory = ModInfo.GUI_FACTORY_CLASS, updateJSON = ModInfo.UPDATE_LINK, dependencies = "required-after:Baubles;")
 public class BaublesStuff {
 
     //Mod Instance
@@ -45,7 +46,7 @@ public class BaublesStuff {
     public static BaublesStuff instance;
 
     //Mod Integrations var
-    public static boolean isRarmor;
+
 
     //Proxy
     @SidedProxy(clientSide = ModInfo.CLIENT_PROXY, serverSide = ModInfo.SERVER_PROXY)
@@ -54,7 +55,7 @@ public class BaublesStuff {
     @EventHandler
     public void preInit(FMLPreInitializationEvent event) {
         //Mod detection
-        isRarmor = Loader.isModLoaded("rarmor");
+
 
         //Blocks
         BlockRegister.init();
@@ -79,6 +80,9 @@ public class BaublesStuff {
 
         //Recipes
         CommonRecipes.register();
+
+        //Village
+        VillageStuff.preInit();
     }
 
     @EventHandler
