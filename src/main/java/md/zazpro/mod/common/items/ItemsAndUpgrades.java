@@ -24,6 +24,7 @@ public class ItemsAndUpgrades {
     public static Item Spell_Book;
     public static Item Translator;
     public static Item Broken_Translator;
+    public static Item Exp_Stuff;
     public static Item Belt_Core;
     public static Item Pendant_Core;
     public static Item Ring_Core;
@@ -75,6 +76,7 @@ public class ItemsAndUpgrades {
         Spell_Book = new SpellBook();
         Translator = new Translator();
         Broken_Translator = new Broken_Translator();
+        Exp_Stuff = new Exp_Stuff();
         Belt_Core = new Belt_Core("Belt_Core");
         Pendant_Core = new Pendant_Core("Pendant_Core");
         Ring_Core = new Ring_Core("Ring_Core");
@@ -125,6 +127,7 @@ public class ItemsAndUpgrades {
         GameRegistry.register(Spell_Book);
         GameRegistry.register(Translator);
         GameRegistry.register(Broken_Translator);
+        GameRegistry.register(Exp_Stuff);
         GameRegistry.register(Sheet_FireImmune);
         GameRegistry.register(Sheet_FallImmune);
         GameRegistry.register(Sheet_Haste);
@@ -176,6 +179,7 @@ public class ItemsAndUpgrades {
         reg(Spell_Book);
         reg(Translator);
         reg(Broken_Translator);
+        reg(Exp_Stuff);
         reg(Sheet_FireImmune);
         reg(Sheet_FallImmune);
         reg(Sheet_Haste);

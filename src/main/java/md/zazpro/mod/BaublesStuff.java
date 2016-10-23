@@ -18,10 +18,12 @@ import md.zazpro.mod.common.achievements.BaublesStuffAchievement;
 import md.zazpro.mod.common.blocks.BlockRegister;
 import md.zazpro.mod.common.config.ConfigurationHandler;
 import md.zazpro.mod.common.items.ItemsAndUpgrades;
+import md.zazpro.mod.common.network.PacketHandler;
 import md.zazpro.mod.common.recipe.CommonRecipes;
 import md.zazpro.mod.common.recipe.RecipeBeltCore;
 import md.zazpro.mod.common.recipe.RecipePendantCore;
 import md.zazpro.mod.common.recipe.RecipeRingCore;
+import md.zazpro.mod.common.tileentity.TEExpGenerator;
 import md.zazpro.mod.common.tileentity.TEExtractor;
 import md.zazpro.mod.common.village.VillageStuff;
 import md.zazpro.mod.proxy.CommonProxy;
@@ -56,6 +58,8 @@ public class BaublesStuff {
     public void preInit(FMLPreInitializationEvent event) {
         //Mod detection
 
+        //Network
+        PacketHandler.preInit();
 
         //Blocks
         BlockRegister.init();
@@ -89,6 +93,7 @@ public class BaublesStuff {
     public void init(FMLInitializationEvent event) {
         //TE Register
         GameRegistry.registerTileEntity(TEExtractor.class, "tileEntityDisassembler");
+        GameRegistry.registerTileEntity(TEExpGenerator.class, "tileEntityExpGenerator");
 
         //Achievement Events Register
         MinecraftForge.EVENT_BUS.register(new AchievementEvents());

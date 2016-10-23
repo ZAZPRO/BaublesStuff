@@ -22,6 +22,7 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 public class BlockRegister {
 
     public static Block UpgradeExtractor;
+    public static Block BlockExpGenerator;
 
     private static void registerBlock(Block block, ItemBlock itemBlock) {
         GameRegistry.register(block);
@@ -38,9 +39,14 @@ public class BlockRegister {
         UpgradeExtractor = new UpgradeExtractor();
         ItemBlock itemUpgradeExtractor = new ItemBlock(UpgradeExtractor);
         registerBlock(UpgradeExtractor, itemUpgradeExtractor);
+
+        BlockExpGenerator = new BlockExpGenerator();
+        ItemBlock itemBlockExpGenerator = new ItemBlock(BlockExpGenerator);
+        registerBlock(BlockExpGenerator, itemBlockExpGenerator);
     }
 
     public static void registerRenders() {
         registerRender(UpgradeExtractor);
+        registerRender(BlockExpGenerator);
     }
 }

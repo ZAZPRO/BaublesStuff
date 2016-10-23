@@ -35,6 +35,10 @@ import net.minecraft.world.World;
  */
 public abstract class BaubleBase extends Item implements IBauble {
 
+    public BaubleBase() {
+
+    }
+
     public BaubleBase(String name) {
         setUnlocalizedName(name);
         setRegistryName(name);

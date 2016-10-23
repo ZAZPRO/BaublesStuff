@@ -11,9 +11,12 @@
 
 package md.zazpro.mod.proxy;
 
+import md.zazpro.mod.BaublesStuff;
+import md.zazpro.mod.client.gui.BSGuiHandler;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.fml.common.network.NetworkRegistry;
 
 public class CommonProxy {
 
@@ -22,7 +25,7 @@ public class CommonProxy {
     }
 
     public void init(FMLInitializationEvent e) {
-
+        NetworkRegistry.INSTANCE.registerGuiHandler(BaublesStuff.instance, new BSGuiHandler());
     }
 
     public void postInit(FMLPostInitializationEvent e) {

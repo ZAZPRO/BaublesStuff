@@ -14,7 +14,8 @@ package md.zazpro.mod.common.baubles;
 import baubles.api.BaubleType;
 import baubles.api.BaublesApi;
 import baubles.api.cap.IBaublesItemHandler;
-import md.zazpro.mod.common.baubles.base.BaubleBase;
+import md.zazpro.mod.client.CreativeTab;
+import md.zazpro.mod.common.energy.BaubleBSUContainer;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
@@ -33,12 +34,16 @@ import org.lwjgl.input.Keyboard;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Belt_Core extends BaubleBase {
+public class Belt_Core extends BaubleBSUContainer {
 
     public static List<String> playersWith1Step = new ArrayList();
 
     public Belt_Core(String name) {
-        super(name);
+        super(1000000, 1000, 1000);
+        setUnlocalizedName(name);
+        setRegistryName(name);
+        setMaxStackSize(1);
+        setCreativeTab(CreativeTab.tabBaublesStuff);
         MinecraftForge.EVENT_BUS.register(this);
     }
 
@@ -47,6 +52,7 @@ public class Belt_Core extends BaubleBase {
     public void addInformation(ItemStack itemStack, EntityPlayer player,
                                java.util.List list, boolean p_77624_4_) {
 
+        list.add(TextFormatting.GOLD + (this.getBSUStored(itemStack) + "/" + this.getMaxBSUStored(itemStack) + " BSU"));
         list.add(I18n.translateToLocal("tooltip.shift"));
 
         if (Keyboard.isKeyDown(Keyboard.KEY_RSHIFT) || Keyboard.isKeyDown(Keyboard.KEY_LSHIFT)) {
