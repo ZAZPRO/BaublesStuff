@@ -13,8 +13,9 @@ package md.zazpro.mod.common.baubles;
 
 import baubles.api.BaubleType;
 import baubles.api.BaublesApi;
-import md.zazpro.mod.common.baubles.base.BaubleBase;
+import md.zazpro.mod.client.CreativeTab;
 import md.zazpro.mod.common.config.ConfigurationHandler;
+import md.zazpro.mod.common.energy.BaubleBSUContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -30,9 +31,15 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.ReflectionHelper;
 import org.lwjgl.input.Keyboard;
 
-public class Pendant_Core extends BaubleBase {
+public class Pendant_Core extends BaubleBSUContainer {
+    private static final int COST_INTERVAL = 20;
+
     public Pendant_Core(String name) {
-        super(name);
+        super(1000000, 1000, 1000);
+        setUnlocalizedName(name);
+        setRegistryName(name);
+        setMaxStackSize(1);
+        setCreativeTab(CreativeTab.tabBaublesStuff);
         MinecraftForge.EVENT_BUS.register(this);
     }
 
@@ -48,6 +55,7 @@ public class Pendant_Core extends BaubleBase {
     public void addInformation(ItemStack itemStack, EntityPlayer player,
                                java.util.List list, boolean p_77624_4_) {
 
+        list.add(TextFormatting.GOLD + (this.getBSUStored(itemStack) + "/" + this.getMaxBSUStored(itemStack) + " BSU"));
         list.add(I18n.translateToLocal("tooltip.shift"));
 
         if (Keyboard.isKeyDown(Keyboard.KEY_RSHIFT) || Keyboard.isKeyDown(Keyboard.KEY_LSHIFT)) {
@@ -79,7 +87,6 @@ public class Pendant_Core extends BaubleBase {
 
     @Override
     public void onEquipped(ItemStack itemStack, EntityLivingBase e) {
-
     }
 
     @Override
@@ -94,25 +101,42 @@ public class Pendant_Core extends BaubleBase {
                 int cooldown = getCooldown(itemStack);
                 Boolean FireImmune = itemStack.getTagCompound().getBoolean("FireImmune");
                 EntityPlayer player = (EntityPlayer) e;
-                if (FireImmune) {
+                if (FireImmune && (player.isInLava() || player.isBurning()) && this.getBSUStored(itemStack) >= ConfigurationHandler.Pendant_FIRE) {
+                    if (player.ticksExisted % COST_INTERVAL == 0)
+                        this.extractBSU(itemStack, ConfigurationHandler.Pendant_FIRE, false);
+                    player.extinguish();
                     setFireImmune(player, true);
+                } else {
+                    setFireImmune(player, false);
                 }
+
                 Boolean FallImmune = itemStack.getTagCompound().getBoolean("FallImmune");
-                if (FallImmune) {
+                if (FallImmune && !player.isCreative() && !player.onGround && this.getBSUStored(itemStack) >= ConfigurationHandler.Pendant_FALL) {
+                    if (player.ticksExisted % COST_INTERVAL == 0)
+                        this.extractBSU(itemStack, ConfigurationHandler.Pendant_FALL, false);
                     player.fallDistance = 0;
                 }
+
                 Boolean WaterBreathing = itemStack.getTagCompound().getBoolean("WaterBreathing");
-                if (WaterBreathing && player.isInsideOfMaterial(Material.WATER)) {
+                if (WaterBreathing && player.isInsideOfMaterial(Material.WATER) && this.getBSUStored(itemStack) >= ConfigurationHandler.Pendant_WATER) {
+                    if (player.ticksExisted % COST_INTERVAL == 0)
+                        this.extractBSU(itemStack, ConfigurationHandler.Pendant_WATER, false);
                     player.setAir(280);
                 }
+
                 Boolean WitherImmune = itemStack.getTagCompound().getBoolean("WitherImmune");
-                if (WitherImmune && (player.getActivePotionEffect(Potion.getPotionById(20)) != null)) {
+                if (WitherImmune && (player.getActivePotionEffect(Potion.getPotionById(20)) != null) && this.getBSUStored(itemStack) >= ConfigurationHandler.Pendant_WITHER) {
+                    if (player.ticksExisted % COST_INTERVAL == 0)
+                        this.extractBSU(itemStack, ConfigurationHandler.Pendant_WITHER, false);
                     player.removeActivePotionEffect(Potion.getPotionById(20));
                 }
+
                 Boolean healthRegen = itemStack.getTagCompound().getBoolean("HealthRegen");
                 if (healthRegen) {
                     if (cooldown <= 0) {
-                        if (player.getHealth() < player.getMaxHealth()) {
+                        if (player.getHealth() < player.getMaxHealth() && this.getBSUStored(itemStack) >= ConfigurationHandler.Pendant_HEALTH) {
+                            if (player.ticksExisted % COST_INTERVAL == 0)
+                                this.extractBSU(itemStack, ConfigurationHandler.Pendant_HEALTH, false);
                             player.heal(1.0F);
                             setCooldown(itemStack, 100);
                         }
@@ -131,7 +155,8 @@ public class Pendant_Core extends BaubleBase {
                 itemStack = BaublesApi.getBaublesHandler(player).getStackInSlot(0);
                 boolean Vampire = itemStack.getTagCompound().getBoolean("Vampire");
                 if (Vampire) {
-                    if (player.getHealth() < player.getMaxHealth()) {
+                    if (player.getHealth() < player.getMaxHealth() && this.getBSUStored(itemStack) >= ConfigurationHandler.Pendant_VAMPIRE) {
+                        this.extractBSU(itemStack, ConfigurationHandler.Pendant_VAMPIRE, false);
                         player.heal(event.getAmount() / ConfigurationHandler.VampireAmount);
                     }
                 }

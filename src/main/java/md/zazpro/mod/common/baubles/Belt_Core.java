@@ -15,6 +15,7 @@ import baubles.api.BaubleType;
 import baubles.api.BaublesApi;
 import baubles.api.cap.IBaublesItemHandler;
 import md.zazpro.mod.client.CreativeTab;
+import md.zazpro.mod.common.config.ConfigurationHandler;
 import md.zazpro.mod.common.energy.BaubleBSUContainer;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -36,6 +37,7 @@ import java.util.List;
 
 public class Belt_Core extends BaubleBSUContainer {
 
+    private static final int COST_INTERVAL = 20;
     public static List<String> playersWith1Step = new ArrayList();
 
     public Belt_Core(String name) {
@@ -82,16 +84,40 @@ public class Belt_Core extends BaubleBSUContainer {
             Boolean stepHeight = itemStack.getTagCompound().getBoolean("highStep");
             Integer speed = itemStack.getTagCompound().getInteger("speed");
             Float jump = itemStack.getTagCompound().getFloat("jump");
+            Boolean fly = itemStack.getTagCompound().getBoolean("fly");
 
             if (e instanceof EntityPlayer) {
                 EntityPlayer player = (EntityPlayer) e;
-                if (player.moveForward > 0F)
-                    player.moveRelative(0F, 1F, player.capabilities.isFlying ? 0.030F : (speed * 0.05F));
+                if (player.moveForward > 0F) {
+                    if (this.getBSUStored(itemStack) >= ConfigurationHandler.Belt_SPEED) {
+                        if (player.ticksExisted % COST_INTERVAL == 0)
+                            this.extractBSU(itemStack, ConfigurationHandler.Belt_SPEED, false);
+                        player.moveRelative(0F, 1F, player.capabilities.isFlying ? 0.030F : (speed * 0.05F));
+                    }
+                }
 
                 if (stepHeight) {
-                    if (player.worldObj.isRemote)
-                        player.stepHeight = player.isSneaking() ? 0.5F : 1F;
+                    if (player.worldObj.isRemote) {
+                        if (player.ticksExisted % COST_INTERVAL == 0 && this.getBSUStored(itemStack) >= ConfigurationHandler.Belt_STEP && !player.isSneaking()) {
+                            this.extractBSU(itemStack, ConfigurationHandler.Belt_STEP, false);
+                            player.stepHeight = 1F;
+                        } else if (player.isSneaking())
+                            player.stepHeight = 0.5F;
+                    }
                 }
+
+                if (fly && !player.capabilities.isCreativeMode && !player.onGround) {
+                    if (this.getBSUStored(itemStack) >= ConfigurationHandler.Belt_FLY) {
+                        if (player.ticksExisted % COST_INTERVAL == 0)
+                            this.extractBSU(itemStack, ConfigurationHandler.Belt_FLY, false);
+                        player.capabilities.allowFlying = true;
+                        player.sendPlayerAbilities();
+                    } else {
+                        player.capabilities.allowFlying = false;
+                        player.sendPlayerAbilities();
+                    }
+                }
+
                 if (jump > 0.1F && !player.onGround)
                     player.jumpMovementFactor = 0.1F;
             }
@@ -106,8 +132,10 @@ public class Belt_Core extends BaubleBSUContainer {
 
             if (itemStack != null && itemStack.getTagCompound() != null && itemStack.getItem() instanceof Belt_Core) {
                 float jump = itemStack.getTagCompound().getFloat("jump");
-                player.motionY += jump;
-
+                if (this.getBSUStored(itemStack) >= ConfigurationHandler.Belt_JUMP) {
+                    this.extractBSU(itemStack, ConfigurationHandler.Belt_JUMP, false);
+                    player.motionY += jump;
+                }
             }
         }
     }
@@ -115,7 +143,7 @@ public class Belt_Core extends BaubleBSUContainer {
 
     @Override
     public void onEquipped(ItemStack itemStack, EntityLivingBase e) {
-        if (itemStack.getTagCompound() != null) {
+    /*    if (itemStack.getTagCompound() != null) {
             Boolean fly = itemStack.getTagCompound().getBoolean("fly");
             Integer speed = itemStack.getTagCompound().getInteger("speed");
             EntityPlayer player = (EntityPlayer) e;
@@ -129,7 +157,7 @@ public class Belt_Core extends BaubleBSUContainer {
                 player.capabilities.allowFlying = true;
             }
             player.sendPlayerAbilities();
-        }
+        }*/
     }
 
     @Override

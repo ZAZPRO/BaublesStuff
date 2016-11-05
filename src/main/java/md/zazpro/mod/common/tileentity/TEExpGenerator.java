@@ -33,6 +33,7 @@ public class TEExpGenerator extends TileBSUHandler implements IInventory, ITicka
 
     public TEExpGenerator() {
         this.inventory = new ItemStack[this.getSizeInventory()];
+        storage.setCapacity(maxBSU);
     }
 
     @Override
@@ -236,7 +237,6 @@ public class TEExpGenerator extends TileBSUHandler implements IInventory, ITicka
             }
         }
         nbt.setTag("Items", list);
-        //nbt.setInteger("BSU", this.bsu);
         nbt.setInteger("LVL", this.lvl);
 
         if (this.hasCustomName()) {
@@ -256,7 +256,6 @@ public class TEExpGenerator extends TileBSUHandler implements IInventory, ITicka
             int slot = stackTag.getByte("Slot") & 255;
             this.setInventorySlotContents(slot, ItemStack.loadItemStackFromNBT(stackTag));
         }
-        //this.bsu = nbt.getInteger("BSU");
         this.lvl = nbt.getInteger("LVL");
         if (nbt.hasKey("CustomName", 8)) {
             this.setCustomName(nbt.getString("CustomName"));

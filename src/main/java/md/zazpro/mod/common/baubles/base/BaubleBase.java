@@ -28,7 +28,7 @@ import net.minecraft.world.World;
  * This class was created by <zazpro>. It's distributed as
  * part of the Baubles Stuff Mod. Get the Source Code in github:
  * https://github.com/ZAZPRO/BaublesStuff
- *
+ * <p>
  * Baubles Stuff is Open Source and distributed under the
  * Baubles Stuff License: https://github.com/ZAZPRO/BaublesStuff/blob/master/LICENSE.md
  * Created by zazpro on 5/16/2016.

@@ -72,4 +72,32 @@ public class RingUtils {
 
         return i;
     }
+
+    public static ItemStack getStackFromBoolean(ItemStack is1, ItemStack is2, String tag) {
+        ItemStack itemStack = null;
+        if (is1 != null && is1.hasTagCompound() && is1.getTagCompound().getBoolean(tag))
+            itemStack = is1;
+        else if (is2 != null && is2.hasTagCompound() && is2.getTagCompound().getBoolean(tag))
+            itemStack = is2;
+        return itemStack;
+    }
+
+    public static ItemStack getStackFromFloat(ItemStack is1, ItemStack is2, String tag) {
+        ItemStack itemStack = null;
+        if (is1 != null && is1.hasTagCompound() && is1.getTagCompound().getFloat(tag) > 0)
+            itemStack = is1;
+        else if (is2 != null && is2.hasTagCompound() && is2.getTagCompound().getFloat(tag) > 0)
+            itemStack = is2;
+        return itemStack;
+    }
+
+    public static ItemStack getStackFromInt(ItemStack is1, ItemStack is2, String tag) {
+        ItemStack itemStack = null;
+        if (is1 != null && is1.hasTagCompound() && is1.getTagCompound().getInteger(tag) > 0)
+            itemStack = is1;
+        else if (is2 != null && is2.hasTagCompound() && is2.getTagCompound().getInteger(tag) > 0)
+            itemStack = is2;
+
+        return itemStack;
+    }
 }

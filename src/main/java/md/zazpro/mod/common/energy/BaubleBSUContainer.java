@@ -105,6 +105,16 @@ public abstract class BaubleBSUContainer extends BaubleBase implements IBSUConta
     }
 
     @Override
+    public void setBSUStored(ItemStack container, int amount) {
+
+        if (!container.hasTagCompound()) {
+            container.setTagCompound(new NBTTagCompound());
+            container.getTagCompound().setInteger("BSU", 0);
+        }
+        container.getTagCompound().setInteger("BSU", amount);
+    }
+
+    @Override
     public int getBSUStored(ItemStack container) {
 
         if (container.getTagCompound() == null || !container.getTagCompound().hasKey("BSU")) {

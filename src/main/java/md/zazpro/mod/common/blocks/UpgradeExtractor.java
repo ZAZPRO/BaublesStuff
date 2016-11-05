@@ -13,6 +13,7 @@ package md.zazpro.mod.common.blocks;
 
 import baubles.api.IBauble;
 import md.zazpro.mod.client.CreativeTab;
+import md.zazpro.mod.common.energy.BaubleBSUContainer;
 import md.zazpro.mod.common.tileentity.TEExtractor;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
@@ -43,11 +44,14 @@ public class UpgradeExtractor extends BlockContainer {
         double y = pos.getY();
         double z = pos.getZ();
         if (heldItem != null && heldItem.getItem() instanceof IBauble && heldItem.hasTagCompound()) {
-            if (heldItem.hasTagCompound() && heldItem.getItem() instanceof IBauble) {
+            if (heldItem.hasTagCompound() && heldItem.getItem() instanceof BaubleBSUContainer) {
                 if (!world.isRemote)
                     for (int i = 0; i < heldItem.getTagCompound().getTagList("ItemStacksInBauble", Constants.NBT.TAG_COMPOUND).tagCount(); i++)
                         world.spawnEntityInWorld(new EntityItem(world, x, y, z, ItemStack.loadItemStackFromNBT(heldItem.getTagCompound().getTagList("ItemStacksInBauble", Constants.NBT.TAG_COMPOUND).getCompoundTagAt(i))));
-                player.inventory.setInventorySlotContents(player.inventory.currentItem, new ItemStack(player.getHeldItemMainhand().getItem(), player.getHeldItemMainhand().stackSize, player.getHeldItemMainhand().getItemDamage()));
+                int energy = ((BaubleBSUContainer) player.getHeldItemMainhand().getItem()).getBSUStored(player.getHeldItemMainhand());
+                ItemStack itemStack = new ItemStack(player.getHeldItemMainhand().getItem(), player.getHeldItemMainhand().stackSize, player.getHeldItemMainhand().getItemDamage());
+                ((BaubleBSUContainer) itemStack.getItem()).setBSUStored(itemStack, energy);
+                player.inventory.setInventorySlotContents(player.inventory.currentItem, itemStack);
                 statement = true;
             }
         }

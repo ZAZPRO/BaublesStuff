@@ -13,8 +13,9 @@ package md.zazpro.mod.common.baubles;
 
 import baubles.api.BaubleType;
 import baubles.api.BaublesApi;
-import md.zazpro.mod.common.baubles.base.BaubleBase;
+import md.zazpro.mod.client.CreativeTab;
 import md.zazpro.mod.common.config.ConfigurationHandler;
+import md.zazpro.mod.common.energy.BaubleBSUContainer;
 import md.zazpro.mod.helper.Wrapper;
 import md.zazpro.mod.helper.ring.RingUtils;
 import net.minecraft.block.Block;
@@ -44,13 +45,18 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.lwjgl.input.Keyboard;
 
-public class Ring_Core extends BaubleBase {
+public class Ring_Core extends BaubleBSUContainer {
 
+    private static final int COST_INTERVAL = 20;
     private boolean NightVision = false;
     private boolean checkForNightVision = false;
 
     public Ring_Core(String name) {
-        super(name);
+        super(1000000, 1000, 1000);
+        setUnlocalizedName(name);
+        setRegistryName(name);
+        setMaxStackSize(1);
+        setCreativeTab(CreativeTab.tabBaublesStuff);
         MinecraftForge.EVENT_BUS.register(this);
     }
 
@@ -58,6 +64,7 @@ public class Ring_Core extends BaubleBase {
     public void addInformation(ItemStack itemStack, EntityPlayer player,
                                java.util.List list, boolean p_77624_4_) {
 
+        list.add(TextFormatting.GOLD + (this.getBSUStored(itemStack) + "/" + this.getMaxBSUStored(itemStack) + " BSU"));
         list.add(I18n.translateToLocal("tooltip.shift"));
 
         if (Keyboard.isKeyDown(Keyboard.KEY_RSHIFT) || Keyboard.isKeyDown(Keyboard.KEY_LSHIFT)) {
@@ -93,17 +100,22 @@ public class Ring_Core extends BaubleBase {
     @SubscribeEvent
     @SideOnly(Side.CLIENT)
     public void clientTick(TickEvent.ClientTickEvent event) {
-        if (Minecraft.getMinecraft().thePlayer != null && Wrapper.INSTANCE.world()!=null && checkForNightVision) {
+        if (Minecraft.getMinecraft().thePlayer != null && Wrapper.INSTANCE.world() != null && checkForNightVision) {
             EntityPlayer player = Minecraft.getMinecraft().thePlayer;
             ItemStack itemStack1 = BaublesApi.getBaublesHandler(player).getStackInSlot(1);
             ItemStack itemStack2 = BaublesApi.getBaublesHandler(player).getStackInSlot(2);
             if (RingUtils.isLegalb(itemStack1, itemStack2, "NightVision") && NightVision == false) {
-                float[] bright = Wrapper.INSTANCE.world().provider.getLightBrightnessTable();
-                for (int i = 0; i < bright.length; i++) {
-                    bright[i] = 1.0F;
+                ItemStack itemStack3 = RingUtils.getStackFromBoolean(itemStack1, itemStack2, "NightVision");
+                if (this.getBSUStored(itemStack3) >= ConfigurationHandler.Ring_INVISIBILITY) {
+                    if (player.ticksExisted % COST_INTERVAL == 0)
+                        this.extractBSU(itemStack3, ConfigurationHandler.Ring_INVISIBILITY, false);
+                    float[] bright = Wrapper.INSTANCE.world().provider.getLightBrightnessTable();
+                    for (int i = 0; i < bright.length; i++) {
+                        bright[i] = 1.0F;
+                    }
+                    NightVision = true;
                 }
-                NightVision = true;
-            } else if (!RingUtils.isLegalb(itemStack1, itemStack2, "NightVision") && NightVision){
+            } else if (!RingUtils.isLegalb(itemStack1, itemStack2, "NightVision") && NightVision) {
                 Wrapper.INSTANCE.world().provider.registerWorld(Wrapper.INSTANCE.world());
                 NightVision = false;
             }
@@ -130,17 +142,44 @@ public class Ring_Core extends BaubleBase {
                 ItemStack itemStack2 = BaublesApi.getBaublesHandler(player).getStackInSlot(2);
                 World world = player.worldObj;
 
-                if (RingUtils.isLegalb(itemStack1, itemStack2, "Invisibility"))
-                    player.setInvisible(true);
+                if (RingUtils.isLegalb(itemStack1, itemStack2, "Invisibility")) {
+                    ItemStack itemStack3 = RingUtils.getStackFromBoolean(itemStack1, itemStack2, "Invisibility");
+                    if (this.getBSUStored(itemStack3) >= ConfigurationHandler.Ring_INVISIBILITY) {
+                        if (player.ticksExisted % COST_INTERVAL == 0) {
+                            this.extractBSU(itemStack3, ConfigurationHandler.Ring_INVISIBILITY, false);
+                        }
+                        player.setInvisible(true);
+                    } else {
+                        player.setInvisible(false);
+                    }
+                }
 
-                if (RingUtils.isLegalb(itemStack1, itemStack2, "Growth"))
-                    UpdatePlant(player, world);
+                if (RingUtils.isLegalb(itemStack1, itemStack2, "Growth")) {
+                    ItemStack itemStack3 = RingUtils.getStackFromBoolean(itemStack1, itemStack2, "Growth");
+                    if (this.getBSUStored(itemStack3) >= ConfigurationHandler.Ring_GROWTH) {
+                        if (player.ticksExisted % COST_INTERVAL == 0)
+                            this.extractBSU(itemStack3, ConfigurationHandler.Ring_GROWTH, false);
+                        UpdatePlant(player, world);
+                    }
+                }
 
-                if (RingUtils.isLegalb(itemStack1, itemStack2, "Harvest"))
-                    HarvestPlant(player, world);
+                if (RingUtils.isLegalb(itemStack1, itemStack2, "Harvest")) {
+                    ItemStack itemStack3 = RingUtils.getStackFromBoolean(itemStack1, itemStack2, "Harvest");
+                    if (this.getBSUStored(itemStack3) >= ConfigurationHandler.Ring_HARVEST) {
+                        if (player.ticksExisted % COST_INTERVAL == 0)
+                            this.extractBSU(itemStack3, ConfigurationHandler.Ring_HARVEST, false);
+                        HarvestPlant(player, world);
+                    }
+                }
 
-                if (RingUtils.isLegalb(itemStack1, itemStack2, "Repair"))
-                    RepairItem(player, world);
+                if (RingUtils.isLegalb(itemStack1, itemStack2, "Repair")) {
+                    ItemStack itemStack3 = RingUtils.getStackFromBoolean(itemStack1, itemStack2, "Repair");
+                    if (this.getBSUStored(itemStack3) >= ConfigurationHandler.Ring_REPAIR) {
+                        if (player.ticksExisted % COST_INTERVAL == 0)
+                            this.extractBSU(itemStack3, ConfigurationHandler.Ring_REPAIR, false);
+                        RepairItem(player, world);
+                    }
+                }
 
             }
         }
@@ -228,9 +267,13 @@ public class Ring_Core extends BaubleBase {
             ItemStack itemStack2 = BaublesApi.getBaublesHandler(player).getStackInSlot(2);
 
             if (itemStack != null && RingUtils.isLegalf(itemStack1, itemStack2, "Haste")) {
-                float haste = RingUtils.getFloatFromBauble(itemStack1, itemStack2, "Haste");
-                float f = event.getOriginalSpeed() + haste;
-                event.setNewSpeed(f);
+                ItemStack itemStack3 = RingUtils.getStackFromBoolean(itemStack1, itemStack2, "Haste");
+                if (this.getBSUStored(itemStack3) >= ConfigurationHandler.Ring_HASTE) {
+                    this.extractBSU(itemStack3, ConfigurationHandler.Ring_HASTE, false);
+                    float haste = RingUtils.getFloatFromBauble(itemStack1, itemStack2, "Haste");
+                    float f = event.getOriginalSpeed() + haste;
+                    event.setNewSpeed(f);
+                }
             }
         }
     }
@@ -242,9 +285,13 @@ public class Ring_Core extends BaubleBase {
             ItemStack itemStack1 = BaublesApi.getBaublesHandler(player).getStackInSlot(1);
             ItemStack itemStack2 = BaublesApi.getBaublesHandler(player).getStackInSlot(2);
             if (RingUtils.isLegali(itemStack1, itemStack2, "Power")) {
-                float power = (float) RingUtils.getIntFromBauble(itemStack1, itemStack2, "Power");
-                float amount = event.getAmount() + power;
-                event.setAmount(amount);
+                ItemStack itemStack3 = RingUtils.getStackFromBoolean(itemStack1, itemStack2, "Power");
+                if (this.getBSUStored(itemStack3) >= ConfigurationHandler.Ring_POWER) {
+                    this.extractBSU(itemStack3, ConfigurationHandler.Ring_POWER, false);
+                    float power = (float) RingUtils.getIntFromBauble(itemStack1, itemStack2, "Power");
+                    float amount = event.getAmount() + power;
+                    event.setAmount(amount);
+                }
             }
         }
     }

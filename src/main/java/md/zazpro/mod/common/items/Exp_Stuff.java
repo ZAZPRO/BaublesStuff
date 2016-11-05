@@ -15,7 +15,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.util.text.translation.I18n;
 import net.minecraft.world.World;
-import org.lwjgl.input.Keyboard;
 
 public class Exp_Stuff extends Item {
     Exp_Stuff() {
@@ -24,6 +23,12 @@ public class Exp_Stuff extends Item {
         setRegistryName("Exp_Stuff");
         setMaxStackSize(1);
         setCreativeTab(CreativeTab.tabBaublesStuff);
+    }
+
+    public static int getInteger(ItemStack stack, String name) {
+        if (stack != null && stack.getTagCompound() != null && stack.getTagCompound().hasKey(name)) {
+            return stack.getTagCompound().getInteger(name);
+        } else return 0;
     }
 
     @Override
@@ -40,27 +45,13 @@ public class Exp_Stuff extends Item {
     }
 
     public ActionResult<ItemStack> onItemRightClick(ItemStack itemStack, World world, EntityPlayer player, EnumHand hand) {
-        int expLVL;
-        int lvlItem;
         if (!world.isRemote) {
             if (itemStack.hasTagCompound()) {
-                expLVL = player.experienceLevel;
-                lvlItem = NBTHelper.getInteger(itemStack, "expLVL");
-                if (Keyboard.isKeyDown(Keyboard.KEY_RSHIFT) || Keyboard.isKeyDown(Keyboard.KEY_LSHIFT)) {
-                    if (expLVL < lvlItem) {
-                        NBTHelper.setInteger(itemStack, "expLVL", expLVL);
-                        player.removeExperienceLevel(expLVL);
-                        player.experienceTotal = 0;
-                        player.experience = 0;
-                        player.addExperienceLevel(lvlItem);
-                    }
-                } else if (expLVL > lvlItem) {
-                    NBTHelper.setInteger(itemStack, "expLVL", expLVL);
-                    player.removeExperienceLevel(expLVL);
-                    player.experienceTotal = 0;
-                    player.experience = 0;
-                    player.addExperienceLevel(lvlItem);
-                }
+                int lvlPlayer = player.experienceLevel;
+                int lvlItem = NBTHelper.getInteger(itemStack, "expLVL");
+                player.removeExperienceLevel(lvlPlayer);
+                player.addExperienceLevel(lvlItem);
+                NBTHelper.setInteger(itemStack, "expLVL", lvlPlayer);
             }
         }
         return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, itemStack);
@@ -69,24 +60,16 @@ public class Exp_Stuff extends Item {
     public EnumActionResult onItemUse(ItemStack itemStack, EntityPlayer player, World world, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
         if (!world.isRemote) {
             if (itemStack.hasTagCompound()) {
-                if (Keyboard.isKeyDown(Keyboard.KEY_RSHIFT) || Keyboard.isKeyDown(Keyboard.KEY_LSHIFT)) {
-                    if (world.getTileEntity(pos) instanceof TEExpGenerator) {
-                        TEExpGenerator te = (TEExpGenerator) world.getTileEntity(pos);
-                        int lvlItem = NBTHelper.getInteger(itemStack, "expLVL");
-                        int lvlTe = te.getLvlStored();
-                        te.setLvlStored(lvlItem);
-                        NBTHelper.setInteger(itemStack, "expLVL", lvlTe);
-                    }
+                if (world.getTileEntity(pos) instanceof TEExpGenerator) {
+                    TEExpGenerator te = (TEExpGenerator) world.getTileEntity(pos);
+                    int lvlItem = NBTHelper.getInteger(itemStack, "expLVL");
+                    int lvlTe = te.getLvlStored();
+                    te.setLvlStored(lvlItem);
+                    NBTHelper.setInteger(itemStack, "expLVL", lvlTe);
                 }
             }
         }
         return EnumActionResult.SUCCESS;
-    }
-
-    public static int getInteger(ItemStack stack, String name) {
-        if (stack != null && stack.getTagCompound() != null && stack.getTagCompound().hasKey(name)) {
-            return stack.getTagCompound().getInteger(name);
-        } else return 0;
     }
 }
 

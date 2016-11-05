@@ -76,7 +76,7 @@ public class BlockExpGenerator extends BlockContainer {
     }
 
     public boolean isOpaqueCube(IBlockState state) {
-        return true;
+        return false;
     }
 
     @Override

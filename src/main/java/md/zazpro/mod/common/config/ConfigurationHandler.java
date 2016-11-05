@@ -24,9 +24,9 @@ public class ConfigurationHandler {
     public static final String CAT_UPDATE = "update check";
     public static final String CAT_BCRAFT = "baubles crafting";
     public static final String CAT_UCRAFT = "upgades crafting";
-    //public static final String CAT_VILLAGE = "village stuff";
     public static final String CAT_MODCOMP = "mod compatibility";
     public static final String CAT_BTWEAK = "balance tweak";
+    public static final String CAT_ETWEAK = "bsu tweak";
     public static final String s1 = "Is ";
     public static final String s2 = " recipe enabled";
     public static Configuration configuration;
@@ -35,6 +35,9 @@ public class ConfigurationHandler {
     public static boolean CUpgrade_Fly, CUpgrade_FireImmune, CUpgrade_Vampire, CUpgrade_HighStep, CUpgrade_FallImmune, CUpgrade_WaterBreathing, CUpgrade_SpeedI, CUpgrade_SpeedII, CUpgrade_SpeedIII;
     public static boolean CUpgrade_JumpI, CUpgrade_JumpII, CUpgrade_JumpIII, CUpgrade_WitherImmune, CMagnetRing, CUpgrade_HealthRegen, CUpgrade_Invisibility, CNotLMagnetRing;
     public static boolean CUpgrade_HasteI, CUpgrade_HasteII, CUpgrade_HasteIII, CUpgrade_PowerI, CUpgrade_PowerII, CUpgrade_PowerIII, CUpgrade_NightVision, CUpgrade_Growth, CUpgrade_Repair, CUpgrade_Harvest;
+    public static int Belt_STEP, Belt_SPEED, Belt_JUMP, Belt_FLY;
+    public static int Pendant_FIRE, Pendant_FALL, Pendant_WITHER, Pendant_WATER, Pendant_HEALTH, Pendant_VAMPIRE;
+    public static int Ring_INVISIBILITY, Ring_NIGH, Ring_HASTE, Ring_POWER, Ring_GROWTH, Ring_HARVEST, Ring_REPAIR;
 
     public static int MagnetRange;
     public static int GrowthChance;
@@ -43,8 +46,6 @@ public class ConfigurationHandler {
     public static int TranslatorChance;
     public static int TranslatorDurability;
     public static int BookChance;
-
-    //public static int villagerId;
 
     public static void loadConfig(File configFile) {
         if (configuration == null)
@@ -93,10 +94,6 @@ public class ConfigurationHandler {
         CMagnetRing = configuration.get(CAT_BCRAFT, "Magnet Ring", true, s1 + "Magnet Ring" + s2).getBoolean();
         CNotLMagnetRing = configuration.get(CAT_BCRAFT, "Instantaneous Magnet Ring", true, s1 + "Instantaneous Magnet Ring" + s2).getBoolean();
 
-        //    configuration.getCategory(CAT_VILLAGE).setComment("Configure village stuff here");
-        //    configuration.setCategoryRequiresMcRestart(CAT_VILLAGE, true);
-        //    villagerId = configuration.get(CAT_VILLAGE, "Villager ID", 20, "If you have crash of village ID change this").getInt();
-
         configuration.getCategory(CAT_MODCOMP).setComment("Configure mod compatibility here");
         configuration.setCategoryRequiresMcRestart(CAT_MODCOMP, true);
         CRarmor = configuration.get(CAT_MODCOMP, "RArmor compatibility", true, "Set it to false to turn off RArmor compatibility").getBoolean();
@@ -109,6 +106,27 @@ public class ConfigurationHandler {
         GrowthChance = configuration.get(CAT_BTWEAK, "Plant Update Chance", 25, "Chance of Plant Updating (Plant Acceleration Upgrade) 1/X # Default value=25").getInt();
         RepairChance = configuration.get(CAT_BTWEAK, "Item Repair Chance", 35, "Chance of Item Repairing 1/X (Stuff Repairing Upgrade) # Default value=35").getInt();
         VampireAmount = configuration.get(CAT_BTWEAK, "Vampire Upgrade heal amount", 3, "How much will heal vampire upgrade damage/X  # Default value=3").getInt();
+
+        configuration.getCategory(CAT_ETWEAK).setComment("BSU consuming balance");
+        Belt_STEP = configuration.get(CAT_ETWEAK, "HighStep Upgrade BSU cost", 1, "HighStep Upgrade BSU cost # Default value=1").getInt();
+        Belt_SPEED = configuration.get(CAT_ETWEAK, "Speed Upgrade BSU cost", 5, "Speed Upgrade BSU cost # Default value=5").getInt();
+        Belt_JUMP = configuration.get(CAT_ETWEAK, "Jump Upgrade BSU cost", 5, "Jump Upgrade BSU cost # Default value=5").getInt();
+        Belt_FLY = configuration.get(CAT_ETWEAK, "Flying Upgrade BSU cost", 25, "Flying Upgrade BSU cost # Default value=25").getInt();
+
+        Pendant_FIRE = configuration.get(CAT_ETWEAK, "Fire Immune Upgrade BSU cost", 25, "Fire Immune Upgrade BSU cost # Default value=25").getInt();
+        Pendant_FALL = configuration.get(CAT_ETWEAK, "Fall Damage Immune Upgrade BSU cost", 10, "Fall Damage Immune Upgrade BSU cost # Default value=10").getInt();
+        Pendant_WITHER = configuration.get(CAT_ETWEAK, "Wither Immune Upgrade BSU cost", 20, "Wither Immune Upgrade BSU cost # Default value=20").getInt();
+        Pendant_WATER = configuration.get(CAT_ETWEAK, "Water Breathing Upgrade BSU cost", 15, "Water Breathing Upgrade BSU cost # Default value=15").getInt();
+        Pendant_HEALTH = configuration.get(CAT_ETWEAK, "Health Regen Upgrade BSU cost", 15, "Health Regen Upgrade BSU cost # Default value=15").getInt();
+        Pendant_VAMPIRE = configuration.get(CAT_ETWEAK, "Vampire Upgrade Upgrade BSU cost", 10, "Vampire Upgrade BSU cost # Default value=10").getInt();
+
+        Ring_INVISIBILITY = configuration.get(CAT_ETWEAK, "Invisibility Upgrade BSU cost", 10, "Invisibility Upgrade BSU cost # Default value=10").getInt();
+        Ring_NIGH = configuration.get(CAT_ETWEAK, "Night Vision Upgrade BSU cost", 1, "Night Vision Upgrade BSU cost # Default value=1").getInt();
+        Ring_HASTE = configuration.get(CAT_ETWEAK, "Haste Upgrade BSU cost", 5, "Haste Upgrade BSU cost # Default value=5").getInt();
+        Ring_POWER = configuration.get(CAT_ETWEAK, "Power Upgrade BSU cost", 5, "Power Upgrade BSU cost # Default value=5").getInt();
+        Ring_GROWTH = configuration.get(CAT_ETWEAK, "Plant Acceleration Upgrade BSU cost", 10, "Plant Acceleration Upgrade BSU cost # Default value=10").getInt();
+        Ring_HARVEST = configuration.get(CAT_ETWEAK, "Plant Harvest Upgrade BSU cost", 15, "Plant Harvest Upgrade BSU cost # Default value=15").getInt();
+        Ring_REPAIR = configuration.get(CAT_ETWEAK, "Stuff Repairing Upgrade BSU cost", 10, "Stuff Repairing Upgrade BSU cost # Default value=10").getInt();
 
         if (configuration.hasChanged())
             configuration.save();

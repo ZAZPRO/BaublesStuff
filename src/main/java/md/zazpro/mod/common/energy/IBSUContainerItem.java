@@ -16,6 +16,7 @@ import net.minecraft.item.ItemStack;
 /**
  * This class is was created by King Lemming as a part of RedstoneFlux API. Check RedstoneFlux API original code here:
  * https://github.om/CoFH/RedstoneFlux-API
+ *
  * @author King Lemming
  */
 
@@ -41,6 +42,8 @@ public interface IBSUContainerItem {
      */
     int extractBSU(ItemStack container, int maxExtract, boolean simulate);
 
+    void setBSUStored(ItemStack container, int amount);
+
     /**
      * Get the amount of energy currently stored in the container item.
      */
@@ -51,5 +54,5 @@ public interface IBSUContainerItem {
      */
     int getMaxBSUStored(ItemStack container);
 
-    int getMaxBSUTransfer (ItemStack container);
+    int getMaxBSUTransfer(ItemStack container);
 }

@@ -14,11 +14,16 @@ package md.zazpro.mod.client.gui;
 import md.zazpro.mod.client.ModInfo;
 import md.zazpro.mod.common.tileentity.TEExpGenerator;
 import md.zazpro.mod.common.tileentity.container.ContainerExpGenerator;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.fml.client.config.GuiUtils;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class GuiExpGenerator extends GuiContainer {
     private static final ResourceLocation resLoc = new ResourceLocation(ModInfo.MODID, "textures/gui/GUI_ExpGenerator.png");
@@ -31,6 +36,10 @@ public class GuiExpGenerator extends GuiContainer {
         this.playerInv = playerInv;
         this.xSize = 176;
         this.ySize = 166;
+    }
+
+    public static boolean isInRect(int x, int y, int xSize, int ySize, int mouseX, int mouseY) {
+        return ((mouseX >= x && mouseX <= x + xSize) && (mouseY >= y && mouseY <= y + ySize));
     }
 
     @Override
@@ -49,5 +58,24 @@ public class GuiExpGenerator extends GuiContainer {
         String s = (String.valueOf(this.expGen.getLvlStored()));
         this.fontRendererObj.drawString(s, 89 - this.fontRendererObj.getStringWidth(s) / 2, 13, 16248327);            //#404040
         this.fontRendererObj.drawString(this.playerInv.getDisplayName().getUnformattedText(), 8, 72, 4210752);      //#404040
+
+        int x = mouseX - guiLeft;
+        int y = mouseY - guiTop;
+        if (isInRect(53, 10, 16, 51, x, y)) {
+            drawOverlay(x, y);
+        }
+    }
+
+    public void drawOverlay(int mouseX, int mouseY) {
+        Minecraft mc = Minecraft.getMinecraft();
+        List<String> text = new ArrayList<String>();
+        text.add(this.getOverlayText());
+
+        GuiUtils.drawHoveringText(text, mouseX, mouseY, mc.displayWidth, mc.displayHeight, -1, mc.fontRendererObj);
+
+    }
+
+    private String getOverlayText() {
+        return this.expGen.getBsuStored() + "/" + this.expGen.getBsuMax() + " BSU";
     }
 }

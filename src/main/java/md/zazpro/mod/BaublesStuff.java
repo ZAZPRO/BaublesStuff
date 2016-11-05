@@ -28,7 +28,6 @@ import md.zazpro.mod.common.tileentity.TEExtractor;
 import md.zazpro.mod.common.village.VillageStuff;
 import md.zazpro.mod.proxy.CommonProxy;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.Mod.Instance;

@@ -16,7 +16,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 
 public class TileBSUHandler extends TileEntity implements IBSUReceiver, IBSUProvider {
-    protected BSUStorage storage = new BSUStorage(100000);
+    protected BSUStorage storage = new BSUStorage(32000);
 
     @Override
     public void readFromNBT(NBTTagCompound nbt) {
