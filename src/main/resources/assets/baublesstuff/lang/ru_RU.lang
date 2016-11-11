@@ -7,6 +7,9 @@ item.Pendant_Core.name=Амулет
 item.Ring_Core.name=Кольцо
 item.Ring_Magnet.name=Магнитное Кольцо
 item.Ring_NotLMagnet.name=Мгновенное Магнитное Кольцо
+item.Body_Core.name=Кожаная накидка [WIP]
+item.Charm_Core.name=Брелок [WIP]
+item.Head_Core.name=Корона [WIP]
 
 #Tooltips
 #Baubles
@@ -40,6 +43,11 @@ tooltip.ring.Repair=Улучшение Починки предметов
 tooltip.items.Pigman=Падает с Свинозомби
 #Translator
 tooltip.translator.uses=Максимальное количество использований
+#Experience Stuff
+tooltip.Exp_Stuff=Уровней сохранено
+tooltip.Exp_Stuff.warning=Внимание! Вы сбросите свою полоску опыта!
+tooltip.Exp_Stuff.info=Правый клик сохраняет уровни в предмете.
+tooltip.Exp_Stuff.info.energy=Shift Правый клик по Генератору на опыте для начала генерации BSU.
 
 #Sheets
 item.Sheet_FireImmune.name=Лист Иммунитета к Огню
@@ -88,8 +96,11 @@ item.Upgrade_Harvest.name=Улучшение Сбора урожая
 #Other Item/Blocks
 item.Spell_Book.name=Книга заклинаний
 item.Translator.name=Карманный переводчик
-tile.UpgradeExtractor.name=Извлекатель Улудшений
 item.Broken_Translator.name=Сломанный переводчик
+item.Exp_Stuff.name=Банк уровней
+tile.UpgradeExtractor.name=Извлекатель Улудшений
+tile.BlockExpGenerator.name=Генератор на опыте
+tile.BlockBookGenerator.name=Книжный генератор [WIP]
 
 #Achievements
 achievement.bs_install=You have installed Baubles Stuff!

@@ -11,6 +11,7 @@
 
 package md.zazpro.mod.common.tileentity;
 
+import md.zazpro.mod.common.config.ConfigurationHandler;
 import md.zazpro.mod.common.energy.BaubleBSUContainer;
 import md.zazpro.mod.common.energy.TileBSUHandler;
 import net.minecraft.entity.player.EntityPlayer;
@@ -27,7 +28,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public class TEExpGenerator extends TileBSUHandler implements IInventory, ITickable {
     public int lvl;
     private int bsu;
-    private int maxBSU = 100000;
+    private int maxBSU = 1000000;
     private ItemStack[] inventory;
     private String customName;
 
@@ -40,7 +41,7 @@ public class TEExpGenerator extends TileBSUHandler implements IInventory, ITicka
     public void update() {
         if (!this.worldObj.isRemote) {
             if (storage.getBSUStored() <= storage.getMaxBSUStored()) {
-                storage.modifyBSUStored(storage.receiveBSU(this.lvl / 2, false));
+                storage.modifyBSUStored(storage.receiveBSU((int) Math.round((lvl * ConfigurationHandler.TEExpGenRate)), false));
                 this.markDirty();
             }
             if (this.validateItem(this.getStackInSlot(0)) && this.getStackInSlot(1) == null) {
@@ -74,9 +75,7 @@ public class TEExpGenerator extends TileBSUHandler implements IInventory, ITicka
     }
 
     @Override
-    public String getName() {
-        return this.hasCustomName() ? this.customName : "container.exp_gen_tile_entity";
-    }
+    public String getName() { return this.hasCustomName() ? this.customName : "container.exp_gen_tile_entity"; }
 
     @Override
     public boolean hasCustomName() {

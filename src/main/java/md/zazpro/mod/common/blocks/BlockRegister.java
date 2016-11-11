@@ -23,6 +23,7 @@ public class BlockRegister {
 
     public static Block UpgradeExtractor;
     public static Block BlockExpGenerator;
+    public static Block BlockBookGenerator;
 
     private static void registerBlock(Block block, ItemBlock itemBlock) {
         GameRegistry.register(block);
@@ -43,10 +44,15 @@ public class BlockRegister {
         BlockExpGenerator = new BlockExpGenerator();
         ItemBlock itemBlockExpGenerator = new ItemBlock(BlockExpGenerator);
         registerBlock(BlockExpGenerator, itemBlockExpGenerator);
+
+        BlockBookGenerator = new BlockBookGenerator();
+        ItemBlock itemBlockBookGenerator = new ItemBlock(BlockBookGenerator);
+        registerBlock(BlockBookGenerator, itemBlockBookGenerator);
     }
 
     public static void registerRenders() {
         registerRender(UpgradeExtractor);
         registerRender(BlockExpGenerator);
+        registerRender(BlockBookGenerator);
     }
 }

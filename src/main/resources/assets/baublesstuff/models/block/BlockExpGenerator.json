@@ -1,9 +1,10 @@
 {
+	"__comment": "Model generated using MrCrayfish's Model Creator (http://mrcrayfish.com/modelcreator/)",
     "textures": {
-        "0": "baublesstuff:blocks/BlockExpGenerator_down",
-        "1": "baublesstuff:blocks/BlockExpGenerator_side",
-        "2": "baublesstuff:blocks/BlockExpGenerator_up",
-		"particle": "baublesstuff:blocks/BlockExpGenerator_up"
+        "0": "baublesstuff:blocks/BlockExpGenerator/BlockExpGenerator_down",
+        "1": "baublesstuff:blocks/BlockExpGenerator/BlockExpGenerator_side",
+        "2": "baublesstuff:blocks/BlockExpGenerator/BlockExpGenerator_up",
+		"particle": "baublesstuff:blocks/BlockExpGenerator/BlockExpGenerator_up"
     },
     "elements": [
         {

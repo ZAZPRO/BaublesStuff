@@ -23,6 +23,7 @@ import md.zazpro.mod.common.recipe.CommonRecipes;
 import md.zazpro.mod.common.recipe.RecipeBeltCore;
 import md.zazpro.mod.common.recipe.RecipePendantCore;
 import md.zazpro.mod.common.recipe.RecipeRingCore;
+import md.zazpro.mod.common.tileentity.TEBookGenerator;
 import md.zazpro.mod.common.tileentity.TEExpGenerator;
 import md.zazpro.mod.common.tileentity.TEExtractor;
 import md.zazpro.mod.common.village.VillageStuff;
@@ -86,6 +87,9 @@ public class BaublesStuff {
 
         //Village
         VillageStuff.preInit();
+
+        //Proxy preInit
+        proxy.preInit(event);
     }
 
     @EventHandler
@@ -93,6 +97,7 @@ public class BaublesStuff {
         //TE Register
         GameRegistry.registerTileEntity(TEExtractor.class, "tileEntityDisassembler");
         GameRegistry.registerTileEntity(TEExpGenerator.class, "tileEntityExpGenerator");
+        GameRegistry.registerTileEntity(TEBookGenerator.class, "tileEntityBookGenerator");
 
         //Achievement Events Register
         MinecraftForge.EVENT_BUS.register(new AchievementEvents());

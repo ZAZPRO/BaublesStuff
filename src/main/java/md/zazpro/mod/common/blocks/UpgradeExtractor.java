@@ -51,26 +51,13 @@ public class UpgradeExtractor extends BlockContainer {
                 int energy = ((BaubleBSUContainer) player.getHeldItemMainhand().getItem()).getBSUStored(player.getHeldItemMainhand());
                 ItemStack itemStack = new ItemStack(player.getHeldItemMainhand().getItem(), player.getHeldItemMainhand().stackSize, player.getHeldItemMainhand().getItemDamage());
                 ((BaubleBSUContainer) itemStack.getItem()).setBSUStored(itemStack, energy);
+                itemStack.getItem().getDurabilityForDisplay(itemStack);
                 player.inventory.setInventorySlotContents(player.inventory.currentItem, itemStack);
                 statement = true;
             }
         }
         return statement;
     }
-
-/*    public static void registerRenders() {
-        reg(BaublesStuff.UpgradeExtractor);
-    }
-
-    private static void reg(Block block) {
-        Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(block), 0, new ModelResourceLocation(
-                ModInfo.MODID + ":" + block.getUnlocalizedName().substring(5), "inventory"));
-    }
-
-    private static void reg1(Block block) {
-        ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(block), 0, new ModelResourceLocation(block.getRegistryName(), "inventory"));
-        ModelBakery.registerItemVariants(Item.getItemFromBlock(block), new ResourceLocation(block.getUnlocalizedName().substring(5)));
-    }*/
 
     @Override
     public EnumBlockRenderType getRenderType(IBlockState state) {
@@ -83,7 +70,7 @@ public class UpgradeExtractor extends BlockContainer {
     }
 
     @Override
-    public TileEntity createNewTileEntity(World world, int p_149915_2_) {
+    public TileEntity createNewTileEntity(World world, int meta) {
         return new TEExtractor();
     }
 }

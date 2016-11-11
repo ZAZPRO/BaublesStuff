@@ -32,7 +32,7 @@ public class GuiExpGenerator extends GuiContainer {
 
     public GuiExpGenerator(EntityPlayer player, IInventory playerInv, TEExpGenerator te) {
         super(new ContainerExpGenerator(player, playerInv, te));
-        this.expGen = (TEExpGenerator) te;
+        this.expGen = te;
         this.playerInv = playerInv;
         this.xSize = 176;
         this.ySize = 166;

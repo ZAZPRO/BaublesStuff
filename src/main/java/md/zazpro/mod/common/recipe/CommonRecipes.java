@@ -28,6 +28,12 @@ public class CommonRecipes {
                 "ALA",
                 'A', Blocks.STONE, 'I', Items.IRON_INGOT, 'L', new ItemStack(Items.DYE, 1, 4), 'D', ItemsAndUpgrades.Upgrade_Stone);
 
+        GameRegistry.addRecipe(new ItemStack(BlockRegister.BlockExpGenerator),
+                "AAA",
+                "UEU",
+                "GDG",
+                'A', Items.BOOK, 'E', Blocks.ENCHANTING_TABLE, 'G', Items.GOLD_INGOT, 'U', ItemsAndUpgrades.Upgrade_Stone, 'D', Items.DIAMOND);
+
         GameRegistry.addRecipe(new ItemStack(ItemsAndUpgrades.Upgrade_Stone),
                 "ABA",
                 "CDC",

@@ -7,6 +7,9 @@ item.Pendant_Core.name=Pendant
 item.Ring_Core.name=Ring
 item.Ring_Magnet.name=Magnet Ring
 item.Ring_NotLMagnet.name=Instantaneous Magnet Ring
+item.Body_Core.name=Leather Cape [WIP]
+item.Charm_Core.name=Charm [WIP]
+item.Head_Core.name=Crown [WIP]
 
 #Tooltips
 #Baubles
@@ -40,6 +43,11 @@ tooltip.ring.Repair=Stuff Repairing Upgrade
 tooltip.items.Pigman=Pigman drop
 #Translator
 tooltip.translator.uses=Max uses
+#Experience Stuff
+tooltip.Exp_Stuff=LvL Stored
+tooltip.Exp_Stuff.warning=Warning! You will lose your current xp progress!
+tooltip.Exp_Stuff.info=Right click to store your current level.
+tooltip.Exp_Stuff.info.energy=Shift Right click to Experience generator to start BSU production.
 
 #Sheets
 item.Sheet_FireImmune.name=Fire Immune Paper
@@ -88,8 +96,11 @@ item.Upgrade_Harvest.name=Plant Harvest Upgrade
 #Other Item/Blocks
 item.Spell_Book.name=Book of Spells
 item.Translator.name=Portable Translator
-tile.UpgradeExtractor.name=Upgrade Extractor
 item.Broken_Translator.name=Broken Translator
+item.Exp_Stuff.name=Experience Stuff
+tile.UpgradeExtractor.name=Upgrade Extractor
+tile.BlockExpGenerator.name=Experience Generator
+tile.BlockBookGenerator.name=Book Generator [WIP]
 
 #Achievements
 achievement.bs_install=You have installed Baubles Stuff!

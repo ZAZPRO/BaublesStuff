@@ -1,9 +1,10 @@
 {
+  "__comment": "Model generated using MrCrayfish's Model Creator (http://mrcrayfish.com/modelcreator/)",
   "textures": {
-    "0": "baublesstuff:blocks/UpgradeExtractor_side",
-    "1": "baublesstuff:blocks/UpgradeExtractor_down",
-    "2": "baublesstuff:blocks/UpgradeExtractor_face",
-    "particle": "baublesstuff:blocks/UpgradeExtractor_p"
+    "0": "baublesstuff:blocks/UpgradeExtractor/UpgradeExtractor_side",
+    "1": "baublesstuff:blocks/UpgradeExtractor/UpgradeExtractor_down",
+    "2": "baublesstuff:blocks/UpgradeExtractor/UpgradeExtractor_face",
+    "particle": "baublesstuff:blocks/UpgradeExtractor/UpgradeExtractor_p"
   },
   "elements": [
     {

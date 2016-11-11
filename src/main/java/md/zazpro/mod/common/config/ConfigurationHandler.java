@@ -31,13 +31,14 @@ public class ConfigurationHandler {
     public static final String s2 = " recipe enabled";
     public static Configuration configuration;
     public static boolean CUpdate;
-    public static boolean CRarmor;
+    //public static boolean CRarmor;
     public static boolean CUpgrade_Fly, CUpgrade_FireImmune, CUpgrade_Vampire, CUpgrade_HighStep, CUpgrade_FallImmune, CUpgrade_WaterBreathing, CUpgrade_SpeedI, CUpgrade_SpeedII, CUpgrade_SpeedIII;
     public static boolean CUpgrade_JumpI, CUpgrade_JumpII, CUpgrade_JumpIII, CUpgrade_WitherImmune, CMagnetRing, CUpgrade_HealthRegen, CUpgrade_Invisibility, CNotLMagnetRing;
     public static boolean CUpgrade_HasteI, CUpgrade_HasteII, CUpgrade_HasteIII, CUpgrade_PowerI, CUpgrade_PowerII, CUpgrade_PowerIII, CUpgrade_NightVision, CUpgrade_Growth, CUpgrade_Repair, CUpgrade_Harvest;
     public static int Belt_STEP, Belt_SPEED, Belt_JUMP, Belt_FLY;
     public static int Pendant_FIRE, Pendant_FALL, Pendant_WITHER, Pendant_WATER, Pendant_HEALTH, Pendant_VAMPIRE;
     public static int Ring_INVISIBILITY, Ring_NIGH, Ring_HASTE, Ring_POWER, Ring_GROWTH, Ring_HARVEST, Ring_REPAIR;
+    public static double TEExpGenRate;
 
     public static int MagnetRange;
     public static int GrowthChance;
@@ -88,6 +89,7 @@ public class ConfigurationHandler {
         CUpgrade_Growth = configuration.get(CAT_UCRAFT, "Plant Acceleration Upgrade", true, s1 + "Plant Acceleration Upgrade" + s2).getBoolean();
         CUpgrade_Repair = configuration.get(CAT_UCRAFT, "Stuff Repairing Upgrade", true, s1 + "Stuff Repairing Upgrade" + s2).getBoolean();
         CUpgrade_Harvest = configuration.get(CAT_UCRAFT, "Plant Harvest Upgrade", true, s1 + "Plant Harvest Upgrade" + s2).getBoolean();
+        CUpgrade_Vampire = configuration.get(CAT_UCRAFT, "Vampire Upgrade", true, s1 + "Vampire Upgrade Upgrade" + s2).getBoolean();
 
         configuration.getCategory(CAT_BCRAFT).setComment("Can you craft this bauble?");
         configuration.setCategoryRequiresMcRestart(CAT_BCRAFT, true);
@@ -96,7 +98,7 @@ public class ConfigurationHandler {
 
         configuration.getCategory(CAT_MODCOMP).setComment("Configure mod compatibility here");
         configuration.setCategoryRequiresMcRestart(CAT_MODCOMP, true);
-        CRarmor = configuration.get(CAT_MODCOMP, "RArmor compatibility", true, "Set it to false to turn off RArmor compatibility").getBoolean();
+        //CRarmor = configuration.get(CAT_MODCOMP, "RArmor compatibility", true, "Set it to false to turn off RArmor compatibility").getBoolean();
 
         configuration.getCategory(CAT_BTWEAK).setComment("Configure balance of the mod here");
         MagnetRange = configuration.get(CAT_BTWEAK, "Magnets Range", 16, "Magnets Range # Default value=16.0").getInt();
@@ -127,6 +129,8 @@ public class ConfigurationHandler {
         Ring_GROWTH = configuration.get(CAT_ETWEAK, "Plant Acceleration Upgrade BSU cost", 10, "Plant Acceleration Upgrade BSU cost # Default value=10").getInt();
         Ring_HARVEST = configuration.get(CAT_ETWEAK, "Plant Harvest Upgrade BSU cost", 15, "Plant Harvest Upgrade BSU cost # Default value=15").getInt();
         Ring_REPAIR = configuration.get(CAT_ETWEAK, "Stuff Repairing Upgrade BSU cost", 10, "Stuff Repairing Upgrade BSU cost # Default value=10").getInt();
+
+        TEExpGenRate = configuration.get(CAT_ETWEAK, "Experience Generator energy rate", 2.2, "Lvl stored will be multiplied by this number # Default value=2.2").getDouble();
 
         if (configuration.hasChanged())
             configuration.save();

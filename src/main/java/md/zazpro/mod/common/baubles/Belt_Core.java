@@ -14,13 +14,20 @@ package md.zazpro.mod.common.baubles;
 import baubles.api.BaubleType;
 import baubles.api.BaublesApi;
 import baubles.api.cap.IBaublesItemHandler;
+import baubles.api.render.IRenderBauble;
 import md.zazpro.mod.client.CreativeTab;
+import md.zazpro.mod.client.ModInfo;
 import md.zazpro.mod.common.config.ConfigurationHandler;
 import md.zazpro.mod.common.energy.BaubleBSUContainer;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.model.ModelBiped;
+import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.util.text.translation.I18n;
 import net.minecraftforge.common.MinecraftForge;
@@ -30,25 +37,31 @@ import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.PlayerEvent.PlayerChangedDimensionEvent;
 import net.minecraftforge.fml.common.gameevent.PlayerEvent.PlayerLoggedInEvent;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import org.lwjgl.input.Keyboard;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class Belt_Core extends BaubleBSUContainer {
+public class Belt_Core extends BaubleBSUContainer implements IRenderBauble {
 
     private static final int COST_INTERVAL = 20;
+    private static final ResourceLocation texture = new ResourceLocation("baublesstuff:textures/model/Belt_Core.png");
     public static List<String> playersWith1Step = new ArrayList();
+    @SideOnly(Side.CLIENT)
+    private static ModelBiped model;
+
 
     public Belt_Core(String name) {
-        super(1000000, 1000, 1000);
+        super(800000, 1000, 1000);
         setUnlocalizedName(name);
         setRegistryName(name);
         setMaxStackSize(1);
         setCreativeTab(CreativeTab.tabBaublesStuff);
+        setHasSubtypes(true);
         MinecraftForge.EVENT_BUS.register(this);
     }
-
 
     @Override
     public void addInformation(ItemStack itemStack, EntityPlayer player,
@@ -76,7 +89,6 @@ public class Belt_Core extends BaubleBSUContainer {
         }
     }
 
-
     @Override
     public void onWornTick(ItemStack itemStack, EntityLivingBase e) {
         if (itemStack.getTagCompound() != null) {
@@ -88,7 +100,7 @@ public class Belt_Core extends BaubleBSUContainer {
 
             if (e instanceof EntityPlayer) {
                 EntityPlayer player = (EntityPlayer) e;
-                if (player.moveForward > 0F) {
+                if (speed > 0 && player.moveForward > 0F) {
                     if (this.getBSUStored(itemStack) >= ConfigurationHandler.Belt_SPEED) {
                         if (player.ticksExisted % COST_INTERVAL == 0)
                             this.extractBSU(itemStack, ConfigurationHandler.Belt_SPEED, false);
@@ -139,7 +151,6 @@ public class Belt_Core extends BaubleBSUContainer {
             }
         }
     }
-
 
     @Override
     public void onEquipped(ItemStack itemStack, EntityLivingBase e) {
@@ -242,6 +253,42 @@ public class Belt_Core extends BaubleBSUContainer {
                 player.stepHeight = 0.5F;
             }
         }
+    }
+
+    // This is a fun method which allows us to run some code when our item is
+    // shown in a creative tab.
+    @SideOnly(Side.CLIENT)
+    public void getSubItems(Item item, CreativeTabs tab, List itemList) {
+        ItemStack itemStack = new ItemStack(item);
+        this.setBSUStored(itemStack, 0);
+        itemList.add(itemStack);
+        ItemStack itemStack1 = new ItemStack(item);
+        this.setBSUStored(itemStack1, this.getMaxBSUStored(itemStack));
+        itemList.add(itemStack1);
+    }
+
+    @SideOnly(Side.CLIENT)
+    @Override
+    public void onPlayerBaubleRender(ItemStack itemStack, EntityPlayer entityPlayer, RenderType renderType, float v) {
+        if (renderType == RenderType.BODY) {
+            Minecraft.getMinecraft().renderEngine.bindTexture(getRenderTexture());
+            Helper.rotateIfSneaking(entityPlayer);
+
+            GlStateManager.translate(0F, 0.2F, 0F);
+
+            float s = 1.05F / 16F;
+            GlStateManager.scale(s, s, s);
+            if (model == null)
+                model = new ModelBiped();
+
+            model.bipedBody.render(1F);
+        }
+    }
+
+    @SideOnly(Side.CLIENT)
+    ResourceLocation getRenderTexture() {
+        System.out.println(texture);
+        return texture;
     }
 }
 

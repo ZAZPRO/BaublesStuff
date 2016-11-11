@@ -22,10 +22,12 @@ import net.minecraft.block.Block;
 import net.minecraft.block.IGrowable;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.inventory.IInventory;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextFormatting;
@@ -45,6 +47,8 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.lwjgl.input.Keyboard;
 
+import java.util.List;
+
 public class Ring_Core extends BaubleBSUContainer {
 
     private static final int COST_INTERVAL = 20;
@@ -52,11 +56,12 @@ public class Ring_Core extends BaubleBSUContainer {
     private boolean checkForNightVision = false;
 
     public Ring_Core(String name) {
-        super(1000000, 1000, 1000);
+        super(800000, 1000, 1000);
         setUnlocalizedName(name);
         setRegistryName(name);
         setMaxStackSize(1);
         setCreativeTab(CreativeTab.tabBaublesStuff);
+        setHasSubtypes(true);
         MinecraftForge.EVENT_BUS.register(this);
     }
 
@@ -317,4 +322,16 @@ public class Ring_Core extends BaubleBSUContainer {
         checkForNightVision = true;
     }
 
+    // This is a fun method which allows us to run some code when our item is
+    // shown in a creative tab.
+    @SideOnly(Side.CLIENT)
+    public void getSubItems(Item item, CreativeTabs tab, List itemList)
+    {
+        ItemStack itemStack = new ItemStack(item);
+        this.setBSUStored(itemStack, 0);
+        itemList.add(itemStack);
+        ItemStack itemStack1 = new ItemStack(item);
+        this.setBSUStored(itemStack1, this.getMaxBSUStored(itemStack));
+        itemList.add(itemStack1);
+    }
 }

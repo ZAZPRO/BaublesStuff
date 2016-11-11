@@ -17,9 +17,11 @@ import md.zazpro.mod.client.CreativeTab;
 import md.zazpro.mod.common.config.ConfigurationHandler;
 import md.zazpro.mod.common.energy.BaubleBSUContainer;
 import net.minecraft.block.material.Material;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraft.util.text.TextFormatting;
@@ -29,17 +31,22 @@ import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.ReflectionHelper;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import org.lwjgl.input.Keyboard;
+
+import java.util.List;
 
 public class Pendant_Core extends BaubleBSUContainer {
     private static final int COST_INTERVAL = 20;
 
     public Pendant_Core(String name) {
-        super(1000000, 1000, 1000);
+        super(800000, 1000, 1000);
         setUnlocalizedName(name);
         setRegistryName(name);
         setMaxStackSize(1);
         setCreativeTab(CreativeTab.tabBaublesStuff);
+        setHasSubtypes(true);
         MinecraftForge.EVENT_BUS.register(this);
     }
 
@@ -174,5 +181,17 @@ public class Pendant_Core extends BaubleBSUContainer {
         ReflectionHelper.setPrivateValue(Entity.class, entity, isImmune, "isImmuneToFire", "field_70178_ae", "ag");
     }
 
+    // This is a fun method which allows us to run some code when our item is
+    // shown in a creative tab.
+    @SideOnly(Side.CLIENT)
+    public void getSubItems(Item item, CreativeTabs tab, List itemList)
+    {
+        ItemStack itemStack = new ItemStack(item);
+        this.setBSUStored(itemStack, 0);
+        itemList.add(itemStack);
+        ItemStack itemStack1 = new ItemStack(item);
+        this.setBSUStored(itemStack1, this.getMaxBSUStored(itemStack));
+        itemList.add(itemStack1);
+    }
 
 }

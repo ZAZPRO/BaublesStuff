@@ -1,0 +1,55 @@
+{
+	"forge_marker": 1,
+	"defaults": {
+		"model": "baublesstuff:item/Generated"
+	},
+	"variants": {
+		"variant": {
+			"A": {
+				"textures": {
+					"layer0": "baublesstuff:items/Body_Core.A"
+				}
+			},
+			"B": {
+				"textures": {
+					"layer0": "baublesstuff:items/Body_Core.B"
+				}
+			},
+			"C": {
+				"textures": {
+					"layer0": "baublesstuff:items/Body_Core.C"
+				}
+			},
+			"D": {
+				"textures": {
+					"layer0": "baublesstuff:items/Body_Core.D"
+				}
+			},
+			"E": {
+				"textures": {
+					"layer0": "baublesstuff:items/Body_Core.E"
+				}
+			},
+			"F": {
+				"textures": {
+					"layer0": "baublesstuff:items/Body_Core.F"
+				}
+			},
+			"G": {
+				"textures": {
+					"layer0": "baublesstuff:items/Body_Core.G"
+				}
+			},
+			"H": {
+				"textures": {
+					"layer0": "baublesstuff:items/Body_Core.H"
+				}
+			},
+			"I": {
+				"textures": {
+					"layer0": "baublesstuff:items/Body_Core.I"
+				}
+			}
+		}
+	}
+}

@@ -25,16 +25,13 @@ public class Exp_Stuff extends Item {
         setCreativeTab(CreativeTab.tabBaublesStuff);
     }
 
-    public static int getInteger(ItemStack stack, String name) {
-        if (stack != null && stack.getTagCompound() != null && stack.getTagCompound().hasKey(name)) {
-            return stack.getTagCompound().getInteger(name);
-        } else return 0;
-    }
-
     @Override
     public void addInformation(ItemStack itemStack, EntityPlayer player,
                                java.util.List list, boolean p_77624_4_) {
         list.add(TextFormatting.DARK_GREEN + I18n.translateToLocal("tooltip.Exp_Stuff") + ": " + NBTHelper.getInteger(itemStack, "expLVL"));
+        list.add(TextFormatting.DARK_RED + I18n.translateToLocal("tooltip.Exp_Stuff.warning"));
+        list.add(TextFormatting.WHITE + I18n.translateToLocal("tooltip.Exp_Stuff.info"));
+        list.add(TextFormatting.AQUA + I18n.translateToLocal("tooltip.Exp_Stuff.info.energy"));
     }
 
     @Override

@@ -14,13 +14,23 @@ package md.zazpro.mod.common.items;
 import md.zazpro.mod.client.CreativeTab;
 import md.zazpro.mod.client.ModInfo;
 import md.zazpro.mod.common.baubles.*;
+import md.zazpro.mod.common.baubles.base.GlobalBaubleMesh;
 import md.zazpro.mod.common.config.ConfigurationHandler;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.block.model.ModelBakery;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.Item;
+import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.text.TextFormatting;
+import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
+import java.util.ArrayList;
+
 public class ItemsAndUpgrades {
+    public static final String[] Body_CoreVariants = {"Body_Core.A", "Body_Core.B", "Body_Core.C", "Body_Core.D", "Body_Core.E", "Body_Core.F", "Body_Core.G", "Body_Core.H", "Body_Core.I"};
+    public static final String[] Charm_CoreVariants = {"Charm_Core.DEFAULT", "Charm_Core.WINGS"};
+    public static final String[] Head_CoreVariants = {"Head_Core.DEFAULT", "Head_Core.PERL", "Head_Core.DIAMOND", "Head_Core.EMERALD"};
     public static Item Spell_Book;
     public static Item Translator;
     public static Item Broken_Translator;
@@ -30,6 +40,9 @@ public class ItemsAndUpgrades {
     public static Item Ring_Core;
     public static Item Ring_Magnet;
     public static Item Ring_NotLMagnet;
+    public static Item Body_Core;
+    public static Item Charm_Core;
+    public static Item Head_Core;
     public static Item Upgrade_Stone;
     public static Item Upgrade_HighStep;
     public static Item Upgrade_SpeedI;
@@ -82,31 +95,34 @@ public class ItemsAndUpgrades {
         Ring_Core = new Ring_Core("Ring_Core");
         Ring_Magnet = new Ring_Magnet("Ring_Magnet", ConfigurationHandler.MagnetRange);
         Ring_NotLMagnet = new Ring_NotLMagnet("Ring_NotLMagnet", ConfigurationHandler.MagnetRange);
-        Upgrade_HighStep = new ItemUpgrade("Upgrade_HighStep");
-        Upgrade_SpeedI = new ItemUpgrade("Upgrade_SpeedI");
-        Upgrade_SpeedII = new ItemUpgrade("Upgrade_SpeedII");
-        Upgrade_SpeedIII = new ItemUpgrade("Upgrade_SpeedIII");
-        Upgrade_JumpI = new ItemUpgrade("Upgrade_JumpI");
-        Upgrade_JumpII = new ItemUpgrade("Upgrade_JumpII");
-        Upgrade_JumpIII = new ItemUpgrade("Upgrade_JumpIII");
-        Upgrade_Fly = new ItemUpgrade("Upgrade_Fly");
-        Upgrade_FireImmune = new ItemUpgrade("Upgrade_FireImmune");
-        Upgrade_FallImmune = new ItemUpgrade("Upgrade_FallImmune");
-        Upgrade_WaterBreathing = new ItemUpgrade("Upgrade_WaterBreathing");
-        Upgrade_WitherImmune = new ItemUpgrade("Upgrade_WitherImmune");
-        Upgrade_Invisibility = new ItemUpgrade("Upgrade_Invisibility");
-        Upgrade_HealthRegen = new ItemUpgrade("Upgrade_HealthRegen");
-        Upgrade_NightVision = new ItemUpgrade("Upgrade_NightVision");
-        Upgrade_Growth = new ItemUpgrade("Upgrade_Growth");
-        Upgrade_Harvest = new ItemUpgrade("Upgrade_Harvest");
-        Upgrade_Vampire = new ItemUpgrade("Upgrade_Vampire");
-        Upgrade_HasteI = new ItemUpgrade("Upgrade_HasteI");
-        Upgrade_HasteII = new ItemUpgrade("Upgrade_HasteII");
-        Upgrade_HasteIII = new ItemUpgrade("Upgrade_HasteIII");
-        Upgrade_PowerI = new ItemUpgrade("Upgrade_PowerI");
-        Upgrade_PowerII = new ItemUpgrade("Upgrade_PowerII");
-        Upgrade_PowerIII = new ItemUpgrade("Upgrade_PowerIII");
-        Upgrade_Repair = new ItemUpgrade("Upgrade_Repair");
+        Body_Core = new Body_Core("Body_Core");
+        Charm_Core = new Charm_Core("Charm_Core");
+        Head_Core = new Head_Core("Head_Core");
+        Upgrade_HighStep = new ItemUpgrade("Upgrade_HighStep", formatTooltip(ConfigurationHandler.Belt_STEP, false, true));
+        Upgrade_SpeedI = new ItemUpgrade("Upgrade_SpeedI", formatTooltip(ConfigurationHandler.Belt_SPEED, false, false));
+        Upgrade_SpeedII = new ItemUpgrade("Upgrade_SpeedII", formatTooltip(ConfigurationHandler.Belt_SPEED, false, false));
+        Upgrade_SpeedIII = new ItemUpgrade("Upgrade_SpeedIII", formatTooltip(ConfigurationHandler.Belt_SPEED, false, false));
+        Upgrade_JumpI = new ItemUpgrade("Upgrade_JumpI", formatTooltip(ConfigurationHandler.Belt_JUMP, true, true));
+        Upgrade_JumpII = new ItemUpgrade("Upgrade_JumpII", formatTooltip(ConfigurationHandler.Belt_JUMP, true, true));
+        Upgrade_JumpIII = new ItemUpgrade("Upgrade_JumpIII", formatTooltip(ConfigurationHandler.Belt_JUMP, true, true));
+        Upgrade_Fly = new ItemUpgrade("Upgrade_Fly", formatTooltip(ConfigurationHandler.Belt_FLY, false, false));
+        Upgrade_FireImmune = new ItemUpgrade("Upgrade_FireImmune", formatTooltip(ConfigurationHandler.Pendant_FIRE, false, false));
+        Upgrade_FallImmune = new ItemUpgrade("Upgrade_FallImmune", formatTooltip(ConfigurationHandler.Pendant_FALL, false, false));
+        Upgrade_WaterBreathing = new ItemUpgrade("Upgrade_WaterBreathing", formatTooltip(ConfigurationHandler.Pendant_WATER, false, false));
+        Upgrade_WitherImmune = new ItemUpgrade("Upgrade_WitherImmune", formatTooltip(ConfigurationHandler.Pendant_WITHER, false, false));
+        Upgrade_HealthRegen = new ItemUpgrade("Upgrade_HealthRegen", formatTooltip(ConfigurationHandler.Pendant_HEALTH, false, false));
+        Upgrade_Vampire = new ItemUpgrade("Upgrade_Vampire", formatTooltip(ConfigurationHandler.Pendant_VAMPIRE, true, true));
+        Upgrade_Invisibility = new ItemUpgrade("Upgrade_Invisibility", formatTooltip(ConfigurationHandler.Ring_INVISIBILITY, false, true));
+        Upgrade_NightVision = new ItemUpgrade("Upgrade_NightVision", formatTooltip(ConfigurationHandler.Ring_NIGH, false, true));
+        Upgrade_Growth = new ItemUpgrade("Upgrade_Growth", formatTooltip(ConfigurationHandler.Ring_GROWTH, true, true));
+        Upgrade_Harvest = new ItemUpgrade("Upgrade_Harvest", formatTooltip(ConfigurationHandler.Ring_HARVEST, true, true));
+        Upgrade_HasteI = new ItemUpgrade("Upgrade_HasteI", formatTooltip(ConfigurationHandler.Ring_HASTE, true, true));
+        Upgrade_HasteII = new ItemUpgrade("Upgrade_HasteII", formatTooltip(ConfigurationHandler.Ring_HASTE, true, true));
+        Upgrade_HasteIII = new ItemUpgrade("Upgrade_HasteIII", formatTooltip(ConfigurationHandler.Ring_HASTE, true, true));
+        Upgrade_PowerI = new ItemUpgrade("Upgrade_PowerI", formatTooltip(ConfigurationHandler.Ring_POWER, true, true));
+        Upgrade_PowerII = new ItemUpgrade("Upgrade_PowerII", formatTooltip(ConfigurationHandler.Ring_POWER, true, true));
+        Upgrade_PowerIII = new ItemUpgrade("Upgrade_PowerIII", formatTooltip(ConfigurationHandler.Ring_POWER, true, true));
+        Upgrade_Repair = new ItemUpgrade("Upgrade_Repair", formatTooltip(ConfigurationHandler.Ring_REPAIR, true, true));
         Sheet_FireImmune = new ItemSheet("Sheet_FireImmune");
         Sheet_FallImmune = new ItemSheet("Sheet_FallImmune");
         Sheet_Haste = new ItemSheet("Sheet_Haste");
@@ -147,6 +163,9 @@ public class ItemsAndUpgrades {
         GameRegistry.register(Ring_Core);
         GameRegistry.register(Ring_Magnet);
         GameRegistry.register(Ring_NotLMagnet);
+        GameRegistry.register(Body_Core);
+        GameRegistry.register(Charm_Core);
+        GameRegistry.register(Head_Core);
         GameRegistry.register(Upgrade_Stone);
         GameRegistry.register(Upgrade_HighStep);
         GameRegistry.register(Upgrade_SpeedI);
@@ -227,9 +246,44 @@ public class ItemsAndUpgrades {
         reg(Upgrade_Vampire);
     }
 
+    public static void renderPreInit() {
+        addItemRender(Body_Core);
+        addItemVariants(Body_Core, Body_CoreVariants);
+        addItemRender(Charm_Core);
+        addItemVariants(Charm_Core, Charm_CoreVariants);
+        addItemRender(Head_Core);
+        addItemVariants(Head_Core, Head_CoreVariants);
+    }
+
     private static void reg(Item item) {
         Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(item, 0, new ModelResourceLocation(
                 ModInfo.MODID + ":" + item.getUnlocalizedName().substring(5), "inventory"));
     }
 
+    private static void addItemRender(Item item) {
+        ModelLoader.setCustomMeshDefinition(item, new GlobalBaubleMesh());
+    }
+
+    private static void addItemVariants(Item item, String[] variants) {
+        int len = variants.length;
+
+        ArrayList<ModelResourceLocation> resources = new ArrayList<ModelResourceLocation>();
+
+        if (len > 0) {
+            for (String variant : variants) {
+                ModelResourceLocation model = new ModelResourceLocation(new ResourceLocation(ModInfo.MODID, variant), "inventory");
+                resources.add(model);
+            }
+        }
+        ModelBakery.registerItemVariants(item, resources.toArray(new ModelResourceLocation[len]));
+    }
+
+    private static Object formatTooltip(int amount, boolean flag, boolean flag1) {
+        if (!flag && flag1)
+            return TextFormatting.GOLD + "Passive consume " + TextFormatting.RED +  amount + " BSU/Second";
+        else if (!flag && !flag1)
+            return TextFormatting.GOLD + "Active consume "+ TextFormatting.RED + amount + " BSU/Second";
+        else
+            return TextFormatting.GOLD + "Active consume "+ TextFormatting.RED + amount + " BSU/Work";
+    }
 }

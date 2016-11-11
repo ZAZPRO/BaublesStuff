@@ -60,6 +60,22 @@ public class VersionChecker {
                             "}\n" +
                             "}");
                     player.addChatComponentMessage(component);
+                    ITextComponent component1 = ITextComponent.Serializer.jsonToComponent("{\n" +
+                            "\"text\":\"Now you can support me on Patreon!\",\n" +
+                            "\"color\":\"red\",\n" +
+                            "\"hoverEvent\":{\n" +
+                            "\"action\":\"show_text\",\n" +
+                            "\"value\":{\n" +
+                            "\"text\":\"Click this button to support me on Patreon\",\n" +
+                            "\"color\":\"red\"\n" +
+                            "}\n" +
+                            "},\n" +
+                            "\"clickEvent\":{\n" +
+                            "\"action\":\"open_url\",\n" +
+                            "\"value\":\"" + "https://www.patreon.com/zazpro" + "\"\n" +
+                            "}\n" +
+                            "}");
+                    player.addChatComponentMessage(component1);
                     player.addChatComponentMessage(new ITextComponent.Serializer().jsonToComponent("{\n" +
                             "\"text\":\"" + changelog.get(newRecomVersion).getAsString() + "\"\n" +
                             "}"
