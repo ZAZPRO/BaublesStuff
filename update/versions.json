@@ -1,8 +1,8 @@
 {  
    "homepage":"http://minecraft.curseforge.com/projects/baubles-stuff/files",
    "promos":{  
-      "1.10.2-latest":"3.0.1",
-      "1.10.2-recommended":"3.0.1",
+      "1.10.2-latest":"3.0.2",
+      "1.10.2-recommended":"3.0.2",
       "1.9.4-latest":"2.0.10",
       "1.9.4-recommended":"2.0.10",
       "1.9-latest":"2.0.10",
@@ -13,7 +13,8 @@
       "1.7.10-recommended":"2.1.2"
    },
    "1.10.2":{
-      "3.0.1":"-Serve crash fix!\n- Fly upgrade fix.\n-Baubles Stuff now with own energy system!\n- Check v3.0 Changelog to know more about new added features!",
+      "3.0.2":"- Experience Stuff recipe fix!\n- Baubles Stuff now with own energy system!\n- Check v3.0 Changelog to know more about new added features!",
+      "3.0.1":"- Server crash fix!\n- Fly upgrade fix.\n- Baubles Stuff now with own energy system!\n- Check v3.0 Changelog to know more about new added features!",
       "3.0":"- Baubles Stuff now with own energy system!\n- Added Patreon.\n- Added Experience Generator to generate BSU. (Baubles Stuff Units)\n- Added Experience Stuff to store players level.\n- Belt 3d render on player.\n- Vampire Upgrade craft bug fix.\n- Added WIP new Baubles. (One Baubles with different textures. In future you can customize your Baubles!)",
       "2.0.11":"ALREADY AVAILABLE TO DOWNLOAD!\n- Ported to the new Baubles version!\n- RArmor integration removed.\n- House in village and villager.\n- Tons of bug fixes and checks, no crashes and bugs. (Looks very stable!)"
    },
