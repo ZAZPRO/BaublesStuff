@@ -34,6 +34,13 @@ public class CommonRecipes {
                 "GDG",
                 'A', Items.BOOK, 'E', Blocks.ENCHANTING_TABLE, 'G', Items.GOLD_INGOT, 'U', ItemsAndUpgrades.Upgrade_Stone, 'D', Items.DIAMOND);
 
+        GameRegistry.addRecipe(new ItemStack(ItemsAndUpgrades.Exp_Stuff),
+                "III",
+                "IBI",
+                "III",
+                'B', Items.BOOK, 'I', Items.IRON_INGOT);
+
+
         GameRegistry.addRecipe(new ItemStack(ItemsAndUpgrades.Upgrade_Stone),
                 "ABA",
                 "CDC",

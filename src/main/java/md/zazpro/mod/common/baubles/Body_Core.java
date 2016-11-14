@@ -24,7 +24,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.List;
 
-import static md.zazpro.mod.common.items.ItemsAndUpgrades.Body_CoreVariants;
+import static md.zazpro.mod.common.items.ItemsRender.Body_CoreVariants;
 
 public class Body_Core extends BaubleBase {
 

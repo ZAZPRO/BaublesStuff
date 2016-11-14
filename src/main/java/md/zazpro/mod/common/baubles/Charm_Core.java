@@ -24,7 +24,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.List;
 
-import static md.zazpro.mod.common.items.ItemsAndUpgrades.Charm_CoreVariants;
+import static md.zazpro.mod.common.items.ItemsRender.Charm_CoreVariants;
 
 public class Charm_Core extends BaubleBase {
 

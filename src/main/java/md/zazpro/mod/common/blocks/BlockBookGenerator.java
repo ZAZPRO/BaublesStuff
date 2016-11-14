@@ -15,7 +15,6 @@ import md.zazpro.mod.BaublesStuff;
 import md.zazpro.mod.client.CreativeTab;
 import md.zazpro.mod.client.gui.BSGuiHandler;
 import md.zazpro.mod.common.tileentity.TEBookGenerator;
-import md.zazpro.mod.common.tileentity.TEExpGenerator;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;

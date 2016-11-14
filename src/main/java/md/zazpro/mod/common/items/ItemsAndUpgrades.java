@@ -12,25 +12,13 @@
 package md.zazpro.mod.common.items;
 
 import md.zazpro.mod.client.CreativeTab;
-import md.zazpro.mod.client.ModInfo;
 import md.zazpro.mod.common.baubles.*;
-import md.zazpro.mod.common.baubles.base.GlobalBaubleMesh;
 import md.zazpro.mod.common.config.ConfigurationHandler;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.block.model.ModelBakery;
-import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.Item;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.TextFormatting;
-import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
-import java.util.ArrayList;
-
 public class ItemsAndUpgrades {
-    public static final String[] Body_CoreVariants = {"Body_Core.A", "Body_Core.B", "Body_Core.C", "Body_Core.D", "Body_Core.E", "Body_Core.F", "Body_Core.G", "Body_Core.H", "Body_Core.I"};
-    public static final String[] Charm_CoreVariants = {"Charm_Core.DEFAULT", "Charm_Core.WINGS"};
-    public static final String[] Head_CoreVariants = {"Head_Core.DEFAULT", "Head_Core.PERL", "Head_Core.DIAMOND", "Head_Core.EMERALD"};
     public static Item Spell_Book;
     public static Item Translator;
     public static Item Broken_Translator;
@@ -194,6 +182,7 @@ public class ItemsAndUpgrades {
         GameRegistry.register(Upgrade_Vampire);
     }
 
+    /*
     public static void registerRenders() {
         reg(Spell_Book);
         reg(Translator);
@@ -258,9 +247,9 @@ public class ItemsAndUpgrades {
     private static void reg(Item item) {
         Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(item, 0, new ModelResourceLocation(
                 ModInfo.MODID + ":" + item.getUnlocalizedName().substring(5), "inventory"));
-    }
+    }*/
 
-    private static void addItemRender(Item item) {
+/*    private static void addItemRender(Item item) {
         ModelLoader.setCustomMeshDefinition(item, new GlobalBaubleMesh());
     }
 
@@ -276,14 +265,14 @@ public class ItemsAndUpgrades {
             }
         }
         ModelBakery.registerItemVariants(item, resources.toArray(new ModelResourceLocation[len]));
-    }
+    }*/
 
     private static Object formatTooltip(int amount, boolean flag, boolean flag1) {
         if (!flag && flag1)
-            return TextFormatting.GOLD + "Passive consume " + TextFormatting.RED +  amount + " BSU/Second";
+            return TextFormatting.GOLD + "Passive consume " + TextFormatting.RED + amount + " BSU/Second";
         else if (!flag && !flag1)
-            return TextFormatting.GOLD + "Active consume "+ TextFormatting.RED + amount + " BSU/Second";
+            return TextFormatting.GOLD + "Active consume " + TextFormatting.RED + amount + " BSU/Second";
         else
-            return TextFormatting.GOLD + "Active consume "+ TextFormatting.RED + amount + " BSU/Work";
+            return TextFormatting.GOLD + "Active consume " + TextFormatting.RED + amount + " BSU/Work";
     }
 }

@@ -16,7 +16,6 @@ import baubles.api.BaublesApi;
 import baubles.api.cap.IBaublesItemHandler;
 import baubles.api.render.IRenderBauble;
 import md.zazpro.mod.client.CreativeTab;
-import md.zazpro.mod.client.ModInfo;
 import md.zazpro.mod.common.config.ConfigurationHandler;
 import md.zazpro.mod.common.energy.BaubleBSUContainer;
 import net.minecraft.client.Minecraft;
@@ -126,6 +125,7 @@ public class Belt_Core extends BaubleBSUContainer implements IRenderBauble {
                         player.sendPlayerAbilities();
                     } else {
                         player.capabilities.allowFlying = false;
+                        player.capabilities.isFlying = false;
                         player.sendPlayerAbilities();
                     }
                 }
@@ -178,6 +178,7 @@ public class Belt_Core extends BaubleBSUContainer implements IRenderBauble {
         player.setAIMoveSpeed(0.1F);
         if (!player.capabilities.isCreativeMode) {
             player.capabilities.allowFlying = false;
+            player.capabilities.isFlying = false;
         }
         if (player.worldObj.isRemote) {
             player.capabilities.setPlayerWalkSpeed(0.1F);
@@ -287,7 +288,6 @@ public class Belt_Core extends BaubleBSUContainer implements IRenderBauble {
 
     @SideOnly(Side.CLIENT)
     ResourceLocation getRenderTexture() {
-        System.out.println(texture);
         return texture;
     }
 }
